@@ -5,7 +5,7 @@ import java.util.Scanner;
  */
 public class Alfred {
     /**
-     * Displays Alfred's greeting, stores entered tasks, lists them on request, marks tasks as done,
+     * Displays Alfred's greeting, stores entered tasks, lists them on request, updates task status,
      * and exits on {@code bye}.
      *
      * @param args command-line arguments, which are not used
@@ -48,6 +48,12 @@ public class Alfred {
                 isDone[taskIndex] = true;
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  [X] " + tasks[taskIndex]);
+            } else if (command.startsWith("unmark ")) {
+                int taskNumber = Integer.parseInt(command.substring(7));
+                int taskIndex = taskNumber - 1;
+                isDone[taskIndex] = false;
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("  [ ] " + tasks[taskIndex]);
             } else {
                 tasks[taskCount] = command;
                 taskCount++;
