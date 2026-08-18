@@ -32,3 +32,11 @@ Use `sdk use java 25.0.3.fx-zulu` to switch to Java 25 if needed.
 Use lightweight tags unless the user requests an annotated tag.
 When proposing or creating a commit message, include enough detail to explain the rationale for the change.
 Do not commit or push unless explicitly asked.
+
+## UI testing
+
+After every code update:
+
+1. Update `test/ui-test-plan.md` when the change adds or changes console behavior.
+2. Invoke the project `test-ui` skill at `.cursor/skills/test-ui/SKILL.md` to run the UI test plan.
+3. Report the test-session result, including the console input and output, to the user.
