@@ -353,3 +353,116 @@ ____________________________________________________________
 Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
+
+## Validate delete inputs and the empty-list lifecycle
+
+**Aim:** Verify every delete-number error category, deletion of the final task, and listing an empty task collection.
+
+### Input
+```text
+delete 1
+todo keep me
+delete
+delete two
+delete 0
+delete -1
+delete 2
+list
+delete 1
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+    _    _  __             _
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Alfred's task list is empty, so there is nothing to delete.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] keep me
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Alfred needs a task number after `delete`.
+____________________________________________________________
+____________________________________________________________
+Alfred needs a whole-number task number after `delete`.
+____________________________________________________________
+____________________________________________________________
+Alfred cannot find task 0. Choose a number from 1 to 1.
+____________________________________________________________
+____________________________________________________________
+Alfred cannot find task -1. Choose a number from 1 to 1.
+____________________________________________________________
+____________________________________________________________
+Alfred cannot find task 2. Choose a number from 1 to 1.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][ ] keep me
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+  [T][ ] keep me
+Now you have 0 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```
+
+## Preserve arbitrary deadline and event text
+
+**Aim:** Verify that date and time fields remain strings and are displayed exactly as entered.
+
+### Input
+```text
+deadline do homework /by no idea :-p
+event orientation /from sometime soon /to no idea :-p
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+    _    _  __             _
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] do homework (by: no idea :-p)
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] orientation (from: sometime soon to: no idea :-p)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[D][ ] do homework (by: no idea :-p)
+2.[E][ ] orientation (from: sometime soon to: no idea :-p)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```

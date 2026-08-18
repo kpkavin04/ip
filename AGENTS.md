@@ -35,8 +35,10 @@ Do not commit or push unless explicitly asked.
 
 ## UI testing
 
-After every code update:
+After every source-code update, before returning the completed work to the user:
 
-1. Update `test/ui-test-plan.md` when the change adds or changes console behavior.
-2. Invoke the project `test-ui` skill at `.cursor/skills/test-ui/SKILL.md` to run the UI test plan.
-3. Report the test-session result, including the console input and output, to the user.
+1. Review `test/ui-test-plan.md` against all behavior implemented so far.
+2. Add or update cases when behavior, commands, errors, or state transitions change. Include both successful and invalid inputs, and verify that rejected inputs do not corrupt task state.
+3. Invoke the project `test-ui` skill at `.cursor/skills/test-ui/SKILL.md` and run the entire UI test plan.
+4. Do not report the code update as complete unless all UI tests pass. If a test fails, report the actual and expected output and fix the problem before rerunning.
+5. Report the final test-session result, including the console input and output, to the user.
