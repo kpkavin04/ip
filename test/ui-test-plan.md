@@ -59,3 +59,47 @@ ____________________________________________________________
 Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
+
+## Reject empty and unknown commands without changing tasks
+
+**Aim:** Verify that invalid commands show Alfred-themed errors and do not change the existing task list.
+
+### Input
+```text
+todo read book
+todo
+blah
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+    _    _  __             _ 
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] read book
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Alfred cannot add a to-do without a mission description.
+____________________________________________________________
+____________________________________________________________
+Alfred does not recognize that command. Please try again.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][ ] read book
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```

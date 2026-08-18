@@ -29,50 +29,61 @@ public class Alfred {
             String command = scanner.nextLine();
             System.out.println(separator);
 
-            if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon sir!");
-                System.out.println(separator);
-                break;
-            }
+            try {
+                if (command.equals("bye")) {
+                    System.out.println("Bye. Hope to see you again soon sir!");
+                    System.out.println(separator);
+                    break;
+                }
 
-            if (command.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < taskCount; i++) {
-                    System.out.println((i + 1) + "." + tasks[i]);
-                }
-            } else if (command.startsWith("mark ")) {
-                int taskNumber = Integer.parseInt(command.substring(5));
-                int taskIndex = taskNumber - 1;
-                tasks[taskIndex].markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("  " + tasks[taskIndex]);
-            } else if (command.startsWith("unmark ")) {
-                int taskNumber = Integer.parseInt(command.substring(7));
-                int taskIndex = taskNumber - 1;
-                tasks[taskIndex].markAsNotDone();
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println("  " + tasks[taskIndex]);
-            } else {
-                if (command.startsWith("deadline ")) {
-                    int byMarkerIndex = command.indexOf(" /by ");
-                    String description = command.substring(9, byMarkerIndex);
-                    String by = command.substring(byMarkerIndex + 5);
-                    tasks[taskCount] = new Deadline(description, by);
-                } else if (command.startsWith("event ")) {
-                    int fromMarkerIndex = command.indexOf(" /from ");
-                    int toMarkerIndex = command.indexOf(" /to ", fromMarkerIndex + 7);
-                    String description = command.substring(6, fromMarkerIndex);
-                    String from = command.substring(fromMarkerIndex + 7, toMarkerIndex);
-                    String to = command.substring(toMarkerIndex + 5);
-                    tasks[taskCount] = new Event(description, from, to);
+                if (command.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < taskCount; i++) {
+                        System.out.println((i + 1) + "." + tasks[i]);
+                    }
+                } else if (command.startsWith("mark ")) {
+                    int taskNumber = Integer.parseInt(command.substring(5));
+                    int taskIndex = taskNumber - 1;
+                    tasks[taskIndex].markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("  " + tasks[taskIndex]);
+                } else if (command.startsWith("unmark ")) {
+                    int taskNumber = Integer.parseInt(command.substring(7));
+                    int taskIndex = taskNumber - 1;
+                    tasks[taskIndex].markAsNotDone();
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    System.out.println("  " + tasks[taskIndex]);
                 } else {
-                    String description = command.startsWith("todo ") ? command.substring(5) : command;
-                    tasks[taskCount] = new Todo(description);
+                    Task newTask;
+                    if (command.startsWith("deadline ")) {
+                        int byMarkerIndex = command.indexOf(" /by ");
+                        String description = command.substring(9, byMarkerIndex);
+                        String by = command.substring(byMarkerIndex + 5);
+                        newTask = new Deadline(description, by);
+                    } else if (command.startsWith("event ")) {
+                        int fromMarkerIndex = command.indexOf(" /from ");
+                        int toMarkerIndex = command.indexOf(" /to ", fromMarkerIndex + 7);
+                        String description = command.substring(6, fromMarkerIndex);
+                        String from = command.substring(fromMarkerIndex + 7, toMarkerIndex);
+                        String to = command.substring(toMarkerIndex + 5);
+                        newTask = new Event(description, from, to);
+                    } else if (command.equals("todo") || command.startsWith("todo ")) {
+                        String description = command.substring(4).trim();
+                        if (description.isEmpty()) {
+                            throw new AlfredException("Alfred cannot add a to-do without a mission description.");
+                        }
+                        newTask = new Todo(description);
+                    } else {
+                        throw new AlfredException("Alfred does not recognize that command. Please try again.");
+                    }
+                    tasks[taskCount] = newTask;
+                    taskCount++;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + tasks[taskCount - 1]);
+                    System.out.println("Now you have " + taskCount + " tasks in the list.");
                 }
-                taskCount++;
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + tasks[taskCount - 1]);
-                System.out.println("Now you have " + taskCount + " tasks in the list.");
+            } catch (AlfredException e) {
+                System.out.println(e.getMessage());
             }
             System.out.println(separator);
         }
