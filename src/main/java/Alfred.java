@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 /**
- * Starts Alfred, greets the user, and responds to commands until the user exits.
+ * Starts Alfred, greets the user, stores tasks, and responds to commands until the user exits.
  */
 public class Alfred {
     /**
-     * Displays Alfred's greeting, echoes each command, and exits on {@code bye}.
+     * Displays Alfred's greeting, stores entered tasks, lists them on request, and exits on {@code bye}.
      *
      * @param args command-line arguments, which are not used
      */
@@ -22,6 +22,8 @@ public class Alfred {
         System.out.println(separator);
 
         Scanner scanner = new Scanner(System.in);
+        String[] tasks = new String[100];
+        int taskCount = 0;
         while (true) {
             String command = scanner.nextLine();
             System.out.println(separator);
@@ -32,7 +34,15 @@ public class Alfred {
                 break;
             }
 
-            System.out.println(command);
+            if (command.equals("list")) {
+                for (int i = 0; i < taskCount; i++) {
+                    System.out.println((i + 1) + ". " + tasks[i]);
+                }
+            } else {
+                tasks[taskCount] = command;
+                taskCount++;
+                System.out.println("added: " + command);
+            }
             System.out.println(separator);
         }
     }
