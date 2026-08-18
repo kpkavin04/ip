@@ -58,6 +58,13 @@ public class Alfred {
                     String description = command.substring(9, byMarkerIndex);
                     String by = command.substring(byMarkerIndex + 5);
                     tasks[taskCount] = new Deadline(description, by);
+                } else if (command.startsWith("event ")) {
+                    int fromMarkerIndex = command.indexOf(" /from ");
+                    int toMarkerIndex = command.indexOf(" /to ", fromMarkerIndex + 7);
+                    String description = command.substring(6, fromMarkerIndex);
+                    String from = command.substring(fromMarkerIndex + 7, toMarkerIndex);
+                    String to = command.substring(toMarkerIndex + 5);
+                    tasks[taskCount] = new Event(description, from, to);
                 } else {
                     String description = command.startsWith("todo ") ? command.substring(5) : command;
                     tasks[taskCount] = new Todo(description);
