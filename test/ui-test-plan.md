@@ -60,6 +60,70 @@ Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
 
+## Delete a task and renumber the remaining list
+
+**Aim:** Verify that deletion removes the requested task, preserves the other task types and statuses, and rejects an invalid task number.
+
+### Input
+```text
+todo read book
+deadline return book /by Friday
+event project meeting /from Mon 2pm /to 4pm
+mark 1
+delete 5
+delete 2
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+    _    _  __             _
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] read book
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] return book (by: Friday)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+  [T][X] read book
+____________________________________________________________
+____________________________________________________________
+Alfred cannot find task 5. Choose a number from 1 to 3.
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task:
+  [D][ ] return book (by: Friday)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][X] read book
+2.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```
+
 ## Reject malformed events without changing tasks
 
 **Aim:** Verify that malformed events show specific errors and leave a valid event unchanged.
