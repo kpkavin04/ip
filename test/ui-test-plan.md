@@ -60,6 +60,54 @@ Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
 
+## Reject malformed deadlines without changing tasks
+
+**Aim:** Verify that malformed deadlines show specific errors and leave a valid deadline unchanged.
+
+### Input
+```text
+deadline submit report /by Friday
+deadline submit report
+deadline  /by Friday
+deadline submit report /by 
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+    _    _  __             _ 
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] submit report (by: Friday)
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Alfred needs `/by` followed by a due time for a deadline.
+____________________________________________________________
+____________________________________________________________
+Alfred needs a deadline description before `/by`.
+____________________________________________________________
+____________________________________________________________
+Alfred needs a due time after `/by`.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[D][ ] submit report (by: Friday)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```
+
 ## Reject empty and unknown commands without changing tasks
 
 **Aim:** Verify that invalid commands show Alfred-themed errors and do not change the existing task list.

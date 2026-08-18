@@ -55,10 +55,19 @@ public class Alfred {
                     System.out.println("  " + tasks[taskIndex]);
                 } else {
                     Task newTask;
-                    if (command.startsWith("deadline ")) {
+                    if (command.equals("deadline") || command.startsWith("deadline ")) {
                         int byMarkerIndex = command.indexOf(" /by ");
-                        String description = command.substring(9, byMarkerIndex);
-                        String by = command.substring(byMarkerIndex + 5);
+                        if (byMarkerIndex == -1) {
+                            throw new AlfredException("Alfred needs `/by` followed by a due time for a deadline.");
+                        }
+                        String description = command.substring(9, byMarkerIndex).trim();
+                        String by = command.substring(byMarkerIndex + 5).trim();
+                        if (description.isEmpty()) {
+                            throw new AlfredException("Alfred needs a deadline description before `/by`.");
+                        }
+                        if (by.isEmpty()) {
+                            throw new AlfredException("Alfred needs a due time after `/by`.");
+                        }
                         newTask = new Deadline(description, by);
                     } else if (command.startsWith("event ")) {
                         int fromMarkerIndex = command.indexOf(" /from ");
