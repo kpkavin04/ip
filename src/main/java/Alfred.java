@@ -30,36 +30,37 @@ public class Alfred {
             System.out.println(separator);
 
             try {
-                if (command.equals("bye")) {
+                Command commandType = Command.fromInput(command);
+                if (commandType == Command.BYE) {
                     System.out.println("Bye. Hope to see you again soon sir!");
                     System.out.println(separator);
                     break;
                 }
 
-                if (command.equals("list")) {
+                if (commandType == Command.LIST) {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println((i + 1) + "." + tasks.get(i));
                     }
-                } else if (command.equals("mark") || command.startsWith("mark ")) {
-                    int taskIndex = getTaskIndex(command, "mark", tasks.size());
+                } else if (commandType == Command.MARK) {
+                    int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + tasks.get(taskIndex));
-                } else if (command.equals("unmark") || command.startsWith("unmark ")) {
-                    int taskIndex = getTaskIndex(command, "unmark", tasks.size());
+                } else if (commandType == Command.UNMARK) {
+                    int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsNotDone();
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  " + tasks.get(taskIndex));
-                } else if (command.equals("delete") || command.startsWith("delete ")) {
-                    int taskIndex = getTaskIndex(command, "delete", tasks.size());
+                } else if (commandType == Command.DELETE) {
+                    int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     Task deletedTask = tasks.remove(taskIndex);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("  " + deletedTask);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } else {
                     Task newTask;
-                    if (command.equals("deadline") || command.startsWith("deadline ")) {
+                    if (commandType == Command.DEADLINE) {
                         int byMarkerIndex = command.indexOf(" /by ");
                         if (byMarkerIndex == -1) {
                             if (command.endsWith(" /by")) {
@@ -76,7 +77,7 @@ public class Alfred {
                             throw new AlfredException("Alfred needs a due time after `/by`.");
                         }
                         newTask = new Deadline(description, by);
-                    } else if (command.equals("event") || command.startsWith("event ")) {
+                    } else if (commandType == Command.EVENT) {
                         int fromMarkerIndex = command.indexOf(" /from ");
                         if (fromMarkerIndex == -1) {
                             if (command.endsWith(" /from")) {
@@ -104,7 +105,7 @@ public class Alfred {
                             throw new AlfredException("Alfred needs an end time after `/to`.");
                         }
                         newTask = new Event(description, from, to);
-                    } else if (command.equals("todo") || command.startsWith("todo ")) {
+                    } else if (commandType == Command.TODO) {
                         String description = command.substring(4).trim();
                         if (description.isEmpty()) {
                             throw new AlfredException("Alfred cannot add a to-do without a mission description.");

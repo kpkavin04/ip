@@ -2,15 +2,18 @@
  * Represents one task in Alfred's task list.
  */
 public class Task {
+    private final TaskType type;
     protected final String description;
     protected boolean isDone;
 
     /**
-     * Creates an incomplete task with the given description.
+     * Creates an incomplete task with the given type and description.
      *
+     * @param type kind of task being created
      * @param description text describing the task
      */
-    public Task(String description) {
+    protected Task(TaskType type, String description) {
+        this.type = type;
         this.description = description;
         this.isDone = false;
     }
@@ -46,10 +49,10 @@ public class Task {
     /**
      * Returns this task in the format used in Alfred's task list.
      *
-     * @return a status icon followed by the task description
+     * @return the task type, status icon, and description
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + type.getDisplayCode() + "][" + getStatusIcon() + "] " + description;
     }
 }
