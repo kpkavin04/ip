@@ -1,5 +1,79 @@
 # Alfred UI test plan
 
+## Start with no saved task file
+
+**Aim:** Verify that Alfred starts with an empty task list when its relative data directory and file do not exist yet.
+
+### Input
+```text
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+    _    _  __             _
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```
+
+## Load saved task state after a restart
+
+**Aim:** Verify that add, mark, unmark, and delete changes are saved, then that every task type, date/time field, and completion status is restored by a fresh Alfred session.
+
+### Setup input
+```text
+todo keep this task
+todo remove this task
+deadline return book /by Friday
+event project meeting /from Mon 2pm /to 4pm
+mark 3
+unmark 3
+mark 4
+delete 2
+bye
+```
+
+### Input
+```text
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+    _    _  __             _
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][ ] keep this task
+2.[D][ ] return book (by: Friday)
+3.[E][X] project meeting (from: Mon 2pm to: 4pm)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```
+
 ## Add, update, and list all task types
 
 **Aim:** Verify that ToDos, Deadlines, and Events are stored, formatted, marked, unmarked, and listed correctly.
