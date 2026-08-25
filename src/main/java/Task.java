@@ -47,6 +47,24 @@ public class Task {
     }
 
     /**
+     * Returns the type of this task for storage purposes.
+     *
+     * @return the kind of this task
+     */
+    public TaskType getType() {
+        return type;
+    }
+
+    /**
+     * Returns whether this task has been completed.
+     *
+     * @return {@code true} when the task is complete
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Returns this task in the format used in Alfred's task list.
      *
      * @return the task type, status icon, and description

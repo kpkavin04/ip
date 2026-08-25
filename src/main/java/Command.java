@@ -16,7 +16,7 @@ public enum Command {
     /**
      * Creates a command with the keyword users enter in the console.
      *
-     * @param keyword command word recognised by Alfred
+     * @param keyword command word recognized by Alfred
      */
     Command(String keyword) {
         this.keyword = keyword;

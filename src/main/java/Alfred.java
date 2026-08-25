@@ -24,7 +24,14 @@ public class Alfred {
         System.out.println(separator);
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage();
+        ArrayList<Task> tasks;
+        try {
+            tasks = storage.load();
+        } catch (AlfredException e) {
+            System.out.println(e.getMessage());
+            tasks = new ArrayList<>();
+        }
         while (true) {
             String command = scanner.nextLine();
             System.out.println(separator);
@@ -45,16 +52,19 @@ public class Alfred {
                 } else if (commandType == Command.MARK) {
                     int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsDone();
+                    storage.save(tasks);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  " + tasks.get(taskIndex));
                 } else if (commandType == Command.UNMARK) {
                     int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsNotDone();
+                    storage.save(tasks);
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println("  " + tasks.get(taskIndex));
                 } else if (commandType == Command.DELETE) {
                     int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     Task deletedTask = tasks.remove(taskIndex);
+                    storage.save(tasks);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println("  " + deletedTask);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -115,6 +125,7 @@ public class Alfred {
                         throw new AlfredException("Alfred does not recognize that command. Please try again.");
                     }
                     tasks.add(newTask);
+                    storage.save(tasks);
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  " + tasks.get(tasks.size() - 1));
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
