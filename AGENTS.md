@@ -27,6 +27,12 @@ Unless the user says otherwise, assume that you are assisting a student working 
 
 Use `sdk use java 25.0.3.fx-zulu` to switch to Java 25 if needed.
 
+## Coding standards
+
+Before making any code change, read and follow both `docs/java-coding-standard.md` and
+`docs/git-conventions.md`. The Java standard governs source-code style; the Git standard
+governs branch names and commit messages whenever Git history is changed.
+
 ## Git
 
 Use lightweight tags unless the user requests an annotated tag.
