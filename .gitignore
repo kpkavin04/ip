@@ -21,3 +21,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Output folder
 /out
+
+# Alfred task data, generated at runtime
+/data/

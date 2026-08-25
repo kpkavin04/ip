@@ -13,6 +13,7 @@ PLAN_PATH = PROJECT_ROOT / "test" / "ui-test-plan.md"
 SOURCE_DIRECTORY = PROJECT_ROOT / "src" / "main" / "java"
 CASE_PATTERN = re.compile(
     r"^## (?P<name>.+?)\n\n\*\*Aim:\*\* (?P<aim>.+?)\n\n"
+    r"(?:### Setup input\n```text\n(?P<setup>.*?)\n```\n\n)?"
     r"### Input\n```text\n(?P<input>.*?)\n```\n\n"
     r"### Expected output\n```text\n(?P<expected>.*?)\n```",
     re.MULTILINE | re.DOTALL,
@@ -57,14 +58,31 @@ def main():
     cases = load_cases()
     with tempfile.TemporaryDirectory(prefix="alfred-ui-") as temporary_directory:
         compile_program(Path(temporary_directory))
-        for case in cases:
+        for case_number, case in enumerate(cases):
             name = case.group("name")
             aim = case.group("aim")
             console_input = case.group("input") + "\n"
             expected = case.group("expected") + "\n"
+            case_directory = Path(temporary_directory) / f"case-data-{case_number}"
+            case_directory.mkdir()
+            setup = case.group("setup")
+            if setup is not None:
+                setup_input = setup + "\n"
+                setup_result = subprocess.run(
+                    ["java", "-cp", temporary_directory, "Alfred"],
+                    cwd=case_directory,
+                    input=setup_input,
+                    text=True,
+                    capture_output=True,
+                    check=False,
+                )
+                print_session(name + " setup", aim, setup_input.rstrip(), setup_result.stdout.rstrip())
+                if setup_result.returncode != 0:
+                    print("FAIL: setup session did not exit successfully.")
+                    sys.exit(1)
             result = subprocess.run(
                 ["java", "-cp", temporary_directory, "Alfred"],
-                cwd=PROJECT_ROOT,
+                cwd=case_directory,
                 input=console_input,
                 text=True,
                 capture_output=True,
