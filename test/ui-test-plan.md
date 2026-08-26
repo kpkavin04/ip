@@ -37,8 +37,8 @@ ____________________________________________________________
 ```text
 todo keep this task
 todo remove this task
-deadline return book /by Friday
-event project meeting /from Mon 2pm /to 4pm
+deadline return book /by 2019-12-02
+event project meeting /from 2/12/2019 1800 /to 2019-12-03
 mark 3
 unmark 3
 mark 4
@@ -66,8 +66,8 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] keep this task
-2.[D][ ] return book (by: Friday)
-3.[E][X] project meeting (from: Mon 2pm to: 4pm)
+2.[D][ ] return book (by: Dec 02 2019)
+3.[E][X] project meeting (from: Dec 02 2019 18:00 to: Dec 03 2019)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon sir!
@@ -81,8 +81,8 @@ ____________________________________________________________
 ### Input
 ```text
 todo borrow book
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+deadline return book /by 2019-10-15
+event project meeting /from 2/12/2019 1800 /to 2019-12-03
 mark 2
 unmark 2
 list
@@ -107,27 +107,27 @@ Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Oct 15 2019)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+  [E][ ] project meeting (from: Dec 02 2019 18:00 to: Dec 03 2019)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
-  [D][X] return book (by: Sunday)
+  [D][X] return book (by: Oct 15 2019)
 ____________________________________________________________
 ____________________________________________________________
 OK, I've marked this task as not done yet:
-  [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Oct 15 2019)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+2.[D][ ] return book (by: Oct 15 2019)
+3.[E][ ] project meeting (from: Dec 02 2019 18:00 to: Dec 03 2019)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon sir!
@@ -141,8 +141,8 @@ ____________________________________________________________
 ### Input
 ```text
 todo read book
-deadline return book /by Friday
-event project meeting /from Mon 2pm /to 4pm
+deadline return book /by 2019-10-15
+event project meeting /from 2/12/2019 1800 /to 2019-12-03
 mark 1
 delete 5
 delete 2
@@ -168,12 +168,12 @@ Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] return book (by: Friday)
+  [D][ ] return book (by: Oct 15 2019)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+  [E][ ] project meeting (from: Dec 02 2019 18:00 to: Dec 03 2019)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -185,13 +185,13 @@ Alfred cannot find task 5. Choose a number from 1 to 3.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this task:
-  [D][ ] return book (by: Friday)
+  [D][ ] return book (by: Oct 15 2019)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1.[T][X] read book
-2.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+2.[E][ ] project meeting (from: Dec 02 2019 18:00 to: Dec 03 2019)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon sir!
@@ -204,11 +204,11 @@ ____________________________________________________________
 
 ### Input
 ```text
-event team meeting /from Mon 2pm /to 4pm
+event team meeting /from 2/12/2019 1800 /to 2019-12-03
 event team meeting
 event team meeting /from Mon 2pm
-event  /from Mon 2pm /to 4pm
-event team meeting /from  /to 4pm
+event  /from 2/12/2019 1800 /to 2019-12-03
+event team meeting /from  /to 2019-12-03
 event team meeting /from Mon 2pm /to
 list
 bye
@@ -227,7 +227,7 @@ How can I assist from the cave?
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] team meeting (from: Mon 2pm to: 4pm)
+  [E][ ] team meeting (from: Dec 02 2019 18:00 to: Dec 03 2019)
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -247,7 +247,7 @@ Alfred needs an end time after `/to`.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[E][ ] team meeting (from: Mon 2pm to: 4pm)
+1.[E][ ] team meeting (from: Dec 02 2019 18:00 to: Dec 03 2019)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon sir!
@@ -342,9 +342,9 @@ ____________________________________________________________
 
 ### Input
 ```text
-deadline submit report /by Friday
+deadline submit report /by 2019-10-15
 deadline submit report
-deadline  /by Friday
+deadline  /by 2019-10-15
 deadline submit report /by
 list
 bye
@@ -363,7 +363,7 @@ How can I assist from the cave?
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] submit report (by: Friday)
+  [D][ ] submit report (by: Oct 15 2019)
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -377,7 +377,7 @@ Alfred needs a due time after `/by`.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1.[D][ ] submit report (by: Friday)
+1.[D][ ] submit report (by: Oct 15 2019)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon sir!
@@ -498,14 +498,16 @@ Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
 
-## Preserve arbitrary deadline and event text
+## Parse, format, and reject task dates
 
-**Aim:** Verify that date and time fields remain strings and are displayed exactly as entered.
+**Aim:** Verify both supported date formats are displayed consistently and invalid dates do not change tasks.
 
 ### Input
 ```text
-deadline do homework /by no idea :-p
-event orientation /from sometime soon /to no idea :-p
+deadline do homework /by 2019-10-15
+event orientation /from 2/12/2019 1800 /to 2019-12-03
+deadline invalid deadline /by no idea :-p
+event invalid event /from sometime soon /to 2019-12-03
 list
 bye
 ```
@@ -523,18 +525,24 @@ How can I assist from the cave?
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [D][ ] do homework (by: no idea :-p)
+  [D][ ] do homework (by: Oct 15 2019)
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task:
-  [E][ ] orientation (from: sometime soon to: no idea :-p)
+  [E][ ] orientation (from: Dec 02 2019 18:00 to: Dec 03 2019)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
+Alfred needs a valid date in yyyy-MM-dd or d/M/yyyy HHmm format.
+____________________________________________________________
+____________________________________________________________
+Alfred needs a valid date in yyyy-MM-dd or d/M/yyyy HHmm format.
+____________________________________________________________
+____________________________________________________________
 Here are the tasks in your list:
-1.[D][ ] do homework (by: no idea :-p)
-2.[E][ ] orientation (from: sometime soon to: no idea :-p)
+1.[D][ ] do homework (by: Oct 15 2019)
+2.[E][ ] orientation (from: Dec 02 2019 18:00 to: Dec 03 2019)
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon sir!

@@ -63,23 +63,24 @@ public class Storage {
         }
         if (task.getType() == TaskType.DEADLINE) {
             Deadline deadline = (Deadline) task;
-            return "D\t" + done + "\t" + escape(task.getDescription()) + "\t" + escape(deadline.getBy());
+            return "D\t" + done + "\t" + escape(task.getDescription()) + "\t" + deadline.getBy();
         }
         Event event = (Event) task;
-        return "E\t" + done + "\t" + escape(task.getDescription()) + "\t" + escape(event.getFrom())
-                + "\t" + escape(event.getTo());
+        return "E\t" + done + "\t" + escape(task.getDescription()) + "\t" + event.getFrom()
+                + "\t" + event.getTo();
     }
 
     /** Deserializes one task from an escaped tab-separated storage line. */
-    private Task deserialise(String line) {
+    private Task deserialise(String line) throws AlfredException {
         String[] parts = line.split("\\t", -1);
         Task task;
         if (parts.length == 3 && parts[0].equals("T")) {
             task = new Todo(unescape(parts[2]));
         } else if (parts.length == 4 && parts[0].equals("D")) {
-            task = new Deadline(unescape(parts[2]), unescape(parts[3]));
+            task = new Deadline(unescape(parts[2]), TaskDateTime.parseStored(unescape(parts[3])));
         } else if (parts.length == 5 && parts[0].equals("E")) {
-            task = new Event(unescape(parts[2]), unescape(parts[3]), unescape(parts[4]));
+            task = new Event(unescape(parts[2]), TaskDateTime.parseStored(unescape(parts[3])),
+                    TaskDateTime.parseStored(unescape(parts[4])));
         } else {
             throw new IllegalArgumentException("Invalid task data");
         }
