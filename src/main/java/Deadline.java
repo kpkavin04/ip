@@ -1,16 +1,18 @@
+import java.time.LocalDateTime;
+
 /**
  * Represents a task that must be completed by a specified time.
  */
 public class Deadline extends Task {
-    private final String by;
+    private final LocalDateTime by;
 
     /**
      * Creates an incomplete deadline with its description and due time.
      *
      * @param description text describing the task
-     * @param by due date or time, kept as entered by the user
+     * @param by due date and time
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(TaskType.DEADLINE, description);
         this.by = by;
     }
@@ -18,9 +20,9 @@ public class Deadline extends Task {
     /**
      * Returns the due date or time for storage purposes.
      *
-     * @return the due date or time
+     * @return the due date and time
      */
-    public String getBy() {
+    public LocalDateTime getBy() {
         return by;
     }
 
@@ -31,6 +33,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " + TaskDateTime.format(by) + ")";
     }
 }

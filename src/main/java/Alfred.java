@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -86,7 +87,8 @@ public class Alfred {
                         if (by.isEmpty()) {
                             throw new AlfredException("Alfred needs a due time after `/by`.");
                         }
-                        newTask = new Deadline(description, by);
+                        LocalDateTime byDateTime = TaskDateTime.parse(by);
+                        newTask = new Deadline(description, byDateTime);
                     } else if (commandType == Command.EVENT) {
                         int fromMarkerIndex = command.indexOf(" /from ");
                         if (fromMarkerIndex == -1) {
@@ -114,7 +116,9 @@ public class Alfred {
                         if (to.isEmpty()) {
                             throw new AlfredException("Alfred needs an end time after `/to`.");
                         }
-                        newTask = new Event(description, from, to);
+                        LocalDateTime fromDateTime = TaskDateTime.parse(from);
+                        LocalDateTime toDateTime = TaskDateTime.parse(to);
+                        newTask = new Event(description, fromDateTime, toDateTime);
                     } else if (commandType == Command.TODO) {
                         String description = command.substring(4).trim();
                         if (description.isEmpty()) {
