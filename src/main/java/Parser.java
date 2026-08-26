@@ -4,9 +4,37 @@ import java.time.LocalDateTime;
  * Interprets user commands and constructs the tasks requested by those commands.
  */
 public class Parser {
-    /** Returns the command recognized at the start of a user input line. */
-    public Command parseCommand(String input) {
-        return Command.fromInput(input);
+    /** Returns the command type recognized at the start of a user input line. */
+    private CommandType parseCommandType(String input) {
+        return CommandType.fromInput(input);
+    }
+
+    /**
+     * Creates an executable command when the user input contains sufficient command details.
+     *
+     * @param input full command entered by the user
+     * @param taskCount number of tasks currently stored
+     * @return the executable command described by the input
+     * @throws AlfredException if the input has an unknown command or invalid command details
+     */
+    public Command parseCommand(String input, int taskCount) throws AlfredException {
+        CommandType commandType = parseCommandType(input);
+        if (commandType == CommandType.BYE) {
+            return new ExitCommand();
+        }
+        if (commandType == CommandType.LIST) {
+            return new ListCommand();
+        }
+        if (commandType == CommandType.MARK) {
+            return new MarkCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
+        }
+        if (commandType == CommandType.UNMARK) {
+            return new UnmarkCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
+        }
+        if (commandType == CommandType.DELETE) {
+            return new DeleteCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
+        }
+        return new AddCommand(parseTask(input, commandType));
     }
 
     /**
@@ -17,14 +45,14 @@ public class Parser {
      * @return the task described by the command
      * @throws AlfredException if the command is unrecognized or has invalid task details
      */
-    public Task parseTask(String input, Command commandType) throws AlfredException {
-        if (commandType == Command.DEADLINE) {
+    private Task parseTask(String input, CommandType commandType) throws AlfredException {
+        if (commandType == CommandType.DEADLINE) {
             return parseDeadline(input);
         }
-        if (commandType == Command.EVENT) {
+        if (commandType == CommandType.EVENT) {
             return parseEvent(input);
         }
-        if (commandType == Command.TODO) {
+        if (commandType == CommandType.TODO) {
             return parseTodo(input);
         }
         throw new AlfredException("Alfred does not recognize that command. Please try again.");
