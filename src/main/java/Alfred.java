@@ -26,18 +26,9 @@ public class Alfred {
 
             try {
                 Command executableCommand = parser.parseCommand(command, tasks.size());
-
-                if (executableCommand != null) {
-                    executableCommand.execute(tasks, ui, storage);
-                    if (executableCommand.isExit()) {
-                        break;
-                    }
-                } else {
-                    CommandType commandType = parser.parseCommandType(command);
-                    Task newTask = parser.parseTask(command, commandType);
-                    tasks.add(newTask);
-                    storage.save(tasks);
-                    ui.showTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
+                executableCommand.execute(tasks, ui, storage);
+                if (executableCommand.isExit()) {
+                    break;
                 }
             } catch (AlfredException e) {
                 ui.showError(e.getMessage());

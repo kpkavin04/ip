@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
  */
 public class Parser {
     /** Returns the command type recognized at the start of a user input line. */
-    public CommandType parseCommandType(String input) {
+    private CommandType parseCommandType(String input) {
         return CommandType.fromInput(input);
     }
 
@@ -14,8 +14,8 @@ public class Parser {
      *
      * @param input full command entered by the user
      * @param taskCount number of tasks currently stored
-     * @return the executable command, or {@code null} when a task-creation command needs parsing
-     * @throws AlfredException if a numbered command has an invalid task number
+     * @return the executable command described by the input
+     * @throws AlfredException if the input has an unknown command or invalid command details
      */
     public Command parseCommand(String input, int taskCount) throws AlfredException {
         CommandType commandType = parseCommandType(input);
@@ -34,7 +34,7 @@ public class Parser {
         if (commandType == CommandType.DELETE) {
             return new DeleteCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
         }
-        return null;
+        return new AddCommand(parseTask(input, commandType));
     }
 
     /**
@@ -45,7 +45,7 @@ public class Parser {
      * @return the task described by the command
      * @throws AlfredException if the command is unrecognized or has invalid task details
      */
-    public Task parseTask(String input, CommandType commandType) throws AlfredException {
+    private Task parseTask(String input, CommandType commandType) throws AlfredException {
         if (commandType == CommandType.DEADLINE) {
             return parseDeadline(input);
         }
