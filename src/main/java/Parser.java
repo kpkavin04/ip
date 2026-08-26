@@ -10,17 +10,26 @@ public class Parser {
     }
 
     /**
-     * Creates an executable command for a command type that needs no command arguments.
+     * Creates an executable command when the user input contains sufficient command details.
      *
-     * @param commandType recognized command type
-     * @return the executable command, or {@code null} when the type needs more parsing
+     * @param input full command entered by the user
+     * @param taskCount number of tasks currently stored
+     * @return the executable command, or {@code null} when a task-creation command needs parsing
+     * @throws AlfredException if a numbered command has an invalid task number
      */
-    public Command parseCommand(CommandType commandType) {
+    public Command parseCommand(String input, int taskCount) throws AlfredException {
+        CommandType commandType = parseCommandType(input);
         if (commandType == CommandType.BYE) {
             return new ExitCommand();
         }
         if (commandType == CommandType.LIST) {
             return new ListCommand();
+        }
+        if (commandType == CommandType.MARK) {
+            return new MarkCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
+        }
+        if (commandType == CommandType.UNMARK) {
+            return new UnmarkCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
         }
         return null;
     }
