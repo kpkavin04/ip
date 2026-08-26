@@ -1,6 +1,5 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Starts Alfred, greets the user, stores tasks, and responds to commands until the user exits.
@@ -13,75 +12,44 @@ public class Alfred {
      * @param args command-line arguments, which are not used
      */
     public static void main(String[] args) {
-        String separator = "____________________________________________________________";
-        String banner = "      *==/          |     |            \\==*\n"
-                + "     /XX/           |\\__\\/|             \\XX\\\n"
-                + "   /XXXX\\           |XXXXX|             /XXXX\\\n"
-                + " |XXXXXX\\_         *XXXXXXX*         \\_/XXXXXX|\n"
-                + "XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX\n"
-                + "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|\n"
-                + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
-                + "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|\n"
-                + " XXXXXX/^^^^\"\\XXXXXXXXXXXXXXXXXXXXX/^^^^^\\XXXXXX\n"
-                + " |XXX|       \\XXX/^^\\XXXXX/^^\\XXX/       |XXX|\n"
-                + "   \\XX\\       \\X/    \\XXX/    \\X/       /XX/\n"
-                + "      \"\\       \"      \\X/      \"       /\n"
-                + "\n"
-                + "    _    _  __             _\n"
-                + "   / \\  | |/ _|_ __ ___  __| |\n"
-                + "  / _ \\ | | |_| '__/ _ \\/ _` |\n"
-                + " / ___ \\| |  _| | |  __/ (_| |\n"
-                + "/_/   \\_\\_|_| |_|  \\___|\\__,_|\n";
-        System.out.println(separator);
-        System.out.println(banner);
-        System.out.println("How can I assist from the cave?");
-        System.out.println(separator);
-
-        Scanner scanner = new Scanner(System.in);
+        Ui ui = new Ui();
+        ui.showWelcome();
         Storage storage = new Storage();
         ArrayList<Task> tasks;
         try {
             tasks = storage.load();
         } catch (AlfredException e) {
-            System.out.println(e.getMessage());
+            ui.showError(e.getMessage());
             tasks = new ArrayList<>();
         }
         while (true) {
-            String command = scanner.nextLine();
-            System.out.println(separator);
+            String command = ui.readCommand();
+            ui.showSeparator();
 
             try {
                 Command commandType = Command.fromInput(command);
                 if (commandType == Command.BYE) {
-                    System.out.println("Bye. Hope to see you again soon sir!");
-                    System.out.println(separator);
+                    ui.showGoodbye();
                     break;
                 }
 
                 if (commandType == Command.LIST) {
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println((i + 1) + "." + tasks.get(i));
-                    }
+                    ui.showTaskList(tasks);
                 } else if (commandType == Command.MARK) {
                     int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsDone();
                     storage.save(tasks);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("  " + tasks.get(taskIndex));
+                    ui.showTaskMarked(tasks.get(taskIndex));
                 } else if (commandType == Command.UNMARK) {
                     int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsNotDone();
                     storage.save(tasks);
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println("  " + tasks.get(taskIndex));
+                    ui.showTaskUnmarked(tasks.get(taskIndex));
                 } else if (commandType == Command.DELETE) {
                     int taskIndex = getTaskIndex(command, commandType.getKeyword(), tasks.size());
                     Task deletedTask = tasks.remove(taskIndex);
                     storage.save(tasks);
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println("  " + deletedTask);
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    ui.showTaskDeleted(deletedTask, tasks.size());
                 } else {
                     Task newTask;
                     if (commandType == Command.DEADLINE) {
@@ -143,14 +111,12 @@ public class Alfred {
                     }
                     tasks.add(newTask);
                     storage.save(tasks);
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  " + tasks.get(tasks.size() - 1));
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    ui.showTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                 }
             } catch (AlfredException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e.getMessage());
             }
-            System.out.println(separator);
+            ui.showSeparator();
         }
     }
 
