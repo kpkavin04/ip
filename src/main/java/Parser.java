@@ -4,9 +4,25 @@ import java.time.LocalDateTime;
  * Interprets user commands and constructs the tasks requested by those commands.
  */
 public class Parser {
-    /** Returns the command recognized at the start of a user input line. */
-    public CommandType parseCommand(String input) {
+    /** Returns the command type recognized at the start of a user input line. */
+    public CommandType parseCommandType(String input) {
         return CommandType.fromInput(input);
+    }
+
+    /**
+     * Creates an executable command for a command type that needs no command arguments.
+     *
+     * @param commandType recognized command type
+     * @return the executable command, or {@code null} when the type needs more parsing
+     */
+    public Command parseCommand(CommandType commandType) {
+        if (commandType == CommandType.BYE) {
+            return new ExitCommand();
+        }
+        if (commandType == CommandType.LIST) {
+            return new ListCommand();
+        }
+        return null;
     }
 
     /**

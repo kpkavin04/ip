@@ -25,14 +25,14 @@ public class Alfred {
             ui.showSeparator();
 
             try {
-                CommandType commandType = parser.parseCommand(command);
-                if (commandType == CommandType.BYE) {
-                    ui.showGoodbye();
-                    break;
-                }
+                CommandType commandType = parser.parseCommandType(command);
+                Command executableCommand = parser.parseCommand(commandType);
 
-                if (commandType == CommandType.LIST) {
-                    ui.showTaskList(tasks);
+                if (executableCommand != null) {
+                    executableCommand.execute(tasks, ui, storage);
+                    if (executableCommand.isExit()) {
+                        break;
+                    }
                 } else if (commandType == CommandType.MARK) {
                     int taskIndex = parser.parseTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsDone();
