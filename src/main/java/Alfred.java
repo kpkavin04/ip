@@ -1,40 +1,64 @@
 /**
- * Starts Alfred, greets the user, stores tasks, and responds to commands until the user exits.
+ * Coordinates Alfred's user interface, task storage, and command execution.
  */
 public class Alfred {
+    private final Storage storage;
+    private final Parser parser;
+    private final Ui ui;
+    private TaskList tasks;
+
+    /** Creates Alfred's collaborators. */
+    public Alfred() {
+        storage = new Storage();
+        parser = new Parser();
+        ui = new Ui();
+    }
+
     /**
-     * Displays Alfred's greeting, stores entered tasks, updates and deletes them on request,
-     * and exits on {@code bye}.
+     * Greets the user, loads saved tasks, and executes commands until the user exits.
+     */
+    public void run() {
+        ui.showWelcome();
+        tasks = loadTasks();
+
+        boolean isExit = false;
+        while (!isExit) {
+            String commandInput = ui.readCommand();
+            ui.showSeparator();
+
+            try {
+                Command command = parser.parseCommand(commandInput, tasks.size());
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
+            } catch (AlfredException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showSeparator();
+            }
+        }
+    }
+
+    /**
+     * Loads the saved tasks, returning an empty task list when loading fails.
+     *
+     * @return loaded tasks, or an empty list after a loading error
+     */
+    private TaskList loadTasks() {
+        try {
+            return new TaskList(storage.load());
+        } catch (AlfredException e) {
+            ui.showError(e.getMessage());
+            return new TaskList();
+        }
+    }
+
+    /**
+     * Starts an Alfred session.
      *
      * @param args command-line arguments, which are not used
      */
     public static void main(String[] args) {
-        Ui ui = new Ui();
-        ui.showWelcome();
-        Storage storage = new Storage();
-        Parser parser = new Parser();
-        TaskList tasks;
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (AlfredException e) {
-            ui.showError(e.getMessage());
-            tasks = new TaskList();
-        }
-        while (true) {
-            String command = ui.readCommand();
-            ui.showSeparator();
-
-            try {
-                Command executableCommand = parser.parseCommand(command, tasks.size());
-                executableCommand.execute(tasks, ui, storage);
-                if (executableCommand.isExit()) {
-                    break;
-                }
-            } catch (AlfredException e) {
-                ui.showError(e.getMessage());
-            }
-            ui.showSeparator();
-        }
+        new Alfred().run();
     }
 
 }

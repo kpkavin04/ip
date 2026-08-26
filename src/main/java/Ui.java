@@ -54,7 +54,6 @@ public class Ui {
     /** Displays Alfred's farewell message. */
     public void showGoodbye() {
         System.out.println("Bye. Hope to see you again soon sir!");
-        showSeparator();
     }
 
     /** Displays every task in the current task list. */
