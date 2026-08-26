@@ -25,25 +25,25 @@ public class Alfred {
             ui.showSeparator();
 
             try {
-                Command commandType = parser.parseCommand(command);
-                if (commandType == Command.BYE) {
+                CommandType commandType = parser.parseCommand(command);
+                if (commandType == CommandType.BYE) {
                     ui.showGoodbye();
                     break;
                 }
 
-                if (commandType == Command.LIST) {
+                if (commandType == CommandType.LIST) {
                     ui.showTaskList(tasks);
-                } else if (commandType == Command.MARK) {
+                } else if (commandType == CommandType.MARK) {
                     int taskIndex = parser.parseTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsDone();
                     storage.save(tasks);
                     ui.showTaskMarked(tasks.get(taskIndex));
-                } else if (commandType == Command.UNMARK) {
+                } else if (commandType == CommandType.UNMARK) {
                     int taskIndex = parser.parseTaskIndex(command, commandType.getKeyword(), tasks.size());
                     tasks.get(taskIndex).markAsNotDone();
                     storage.save(tasks);
                     ui.showTaskUnmarked(tasks.get(taskIndex));
-                } else if (commandType == Command.DELETE) {
+                } else if (commandType == CommandType.DELETE) {
                     int taskIndex = parser.parseTaskIndex(command, commandType.getKeyword(), tasks.size());
                     Task deletedTask = tasks.remove(taskIndex);
                     storage.save(tasks);

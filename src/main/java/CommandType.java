@@ -1,7 +1,7 @@
 /**
- * Defines the commands Alfred accepts and their user-facing keywords.
+ * Defines the command keywords Alfred recognizes in user input.
  */
-public enum Command {
+public enum CommandType {
     BYE("bye"),
     LIST("list"),
     MARK("mark"),
@@ -14,24 +14,24 @@ public enum Command {
     private final String keyword;
 
     /**
-     * Creates a command with the keyword users enter in the console.
+     * Creates a command type with the keyword users enter in the console.
      *
      * @param keyword command word recognized by Alfred
      */
-    Command(String keyword) {
+    CommandType(String keyword) {
         this.keyword = keyword;
     }
 
     /**
-     * Finds the command at the beginning of a user input line.
+     * Finds the command type at the beginning of a user input line.
      *
      * @param input full line entered by the user
-     * @return the matching command, or {@code null} when no command matches
+     * @return the matching command type, or {@code null} when no command type matches
      */
-    public static Command fromInput(String input) {
-        for (Command command : values()) {
-            if (input.equals(command.keyword) || input.startsWith(command.keyword + " ")) {
-                return command;
+    public static CommandType fromInput(String input) {
+        for (CommandType commandType : values()) {
+            if (input.equals(commandType.keyword) || input.startsWith(commandType.keyword + " ")) {
+                return commandType;
             }
         }
         return null;

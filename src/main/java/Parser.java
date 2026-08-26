@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
  */
 public class Parser {
     /** Returns the command recognized at the start of a user input line. */
-    public Command parseCommand(String input) {
-        return Command.fromInput(input);
+    public CommandType parseCommand(String input) {
+        return CommandType.fromInput(input);
     }
 
     /**
@@ -17,14 +17,14 @@ public class Parser {
      * @return the task described by the command
      * @throws AlfredException if the command is unrecognized or has invalid task details
      */
-    public Task parseTask(String input, Command commandType) throws AlfredException {
-        if (commandType == Command.DEADLINE) {
+    public Task parseTask(String input, CommandType commandType) throws AlfredException {
+        if (commandType == CommandType.DEADLINE) {
             return parseDeadline(input);
         }
-        if (commandType == Command.EVENT) {
+        if (commandType == CommandType.EVENT) {
             return parseEvent(input);
         }
-        if (commandType == Command.TODO) {
+        if (commandType == CommandType.TODO) {
             return parseTodo(input);
         }
         throw new AlfredException("Alfred does not recognize that command. Please try again.");
