@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * Starts Alfred, greets the user, stores tasks, and responds to commands until the user exits.
@@ -15,12 +14,12 @@ public class Alfred {
         Ui ui = new Ui();
         ui.showWelcome();
         Storage storage = new Storage();
-        ArrayList<Task> tasks;
+        TaskList tasks;
         try {
-            tasks = storage.load();
+            tasks = new TaskList(storage.load());
         } catch (AlfredException e) {
             ui.showError(e.getMessage());
-            tasks = new ArrayList<>();
+            tasks = new TaskList();
         }
         while (true) {
             String command = ui.readCommand();
