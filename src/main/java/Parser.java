@@ -31,6 +31,9 @@ public class Parser {
         if (commandType == CommandType.UNMARK) {
             return new UnmarkCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
         }
+        if (commandType == CommandType.DELETE) {
+            return new DeleteCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
+        }
         return null;
     }
 

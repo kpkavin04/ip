@@ -34,17 +34,10 @@ public class Alfred {
                     }
                 } else {
                     CommandType commandType = parser.parseCommandType(command);
-                    if (commandType == CommandType.DELETE) {
-                        int taskIndex = parser.parseTaskIndex(command, commandType.getKeyword(), tasks.size());
-                        Task deletedTask = tasks.remove(taskIndex);
-                        storage.save(tasks);
-                        ui.showTaskDeleted(deletedTask, tasks.size());
-                    } else {
-                        Task newTask = parser.parseTask(command, commandType);
-                        tasks.add(newTask);
-                        storage.save(tasks);
-                        ui.showTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
-                    }
+                    Task newTask = parser.parseTask(command, commandType);
+                    tasks.add(newTask);
+                    storage.save(tasks);
+                    ui.showTaskAdded(tasks.get(tasks.size() - 1), tasks.size());
                 }
             } catch (AlfredException e) {
                 ui.showError(e.getMessage());
