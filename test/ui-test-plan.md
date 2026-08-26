@@ -13,6 +13,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -55,6 +68,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -92,6 +118,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -153,6 +192,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -217,6 +269,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -279,6 +344,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -353,6 +431,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -400,6 +491,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -450,6 +554,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |
@@ -515,6 +632,19 @@ bye
 ### Expected output
 ```text
 ____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
     _    _  __             _
    / \  | |/ _|_ __ ___  __| |
   / _ \ | | |_| '__/ _ \/ _` |

@@ -14,7 +14,20 @@ public class Alfred {
      */
     public static void main(String[] args) {
         String separator = "____________________________________________________________";
-        String banner = "    _    _  __             _\n"
+        String banner = "      *==/          |     |            \\==*\n"
+                + "     /XX/           |\\__\\/|             \\XX\\\n"
+                + "   /XXXX\\           |XXXXX|             /XXXX\\\n"
+                + " |XXXXXX\\_         *XXXXXXX*         \\_/XXXXXX|\n"
+                + "XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX\n"
+                + "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|\n"
+                + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"
+                + "|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|\n"
+                + " XXXXXX/^^^^\"\\XXXXXXXXXXXXXXXXXXXXX/^^^^^\\XXXXXX\n"
+                + " |XXX|       \\XXX/^^\\XXXXX/^^\\XXX/       |XXX|\n"
+                + "   \\XX\\       \\X/    \\XXX/    \\X/       /XX/\n"
+                + "      \"\\       \"      \\X/      \"       /\n"
+                + "\n"
+                + "    _    _  __             _\n"
                 + "   / \\  | |/ _|_ __ ___  __| |\n"
                 + "  / _ \\ | | |_| '__/ _ \\/ _` |\n"
                 + " / ___ \\| |  _| | |  __/ (_| |\n"
