@@ -3,7 +3,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Saves Alfred tasks to, and loads them from, a file relative to the project directory.
@@ -41,7 +40,7 @@ public class Storage {
      * @param tasks tasks to save
      * @throws AlfredException if the task data cannot be saved
      */
-    public void save(List<Task> tasks) throws AlfredException {
+    public void save(TaskList tasks) throws AlfredException {
         ArrayList<String> lines = new ArrayList<>();
         for (Task task : tasks) {
             lines.add(serialise(task));
