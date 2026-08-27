@@ -115,7 +115,7 @@ public class Parser {
             }
             throw new AlfredException("Alfred needs `/by` followed by a due time for a deadline.");
         }
-        String description = input.substring(9, byMarkerIndex).trim();
+        String description = input.substring(CommandType.DEADLINE.getKeyword().length(), byMarkerIndex).trim();
         String by = input.substring(byMarkerIndex + 5).trim();
         if (description.isEmpty()) {
             throw new AlfredException("Alfred needs a deadline description before `/by`.");
@@ -143,7 +143,7 @@ public class Parser {
             }
             throw new AlfredException("Alfred needs `/to` followed by an end time for an event.");
         }
-        String description = input.substring(6, fromMarkerIndex).trim();
+        String description = input.substring(CommandType.EVENT.getKeyword().length(), fromMarkerIndex).trim();
         String from = input.substring(fromMarkerIndex + 7, toMarkerIndex).trim();
         String to = input.substring(toMarkerIndex + 5).trim();
         if (description.isEmpty()) {

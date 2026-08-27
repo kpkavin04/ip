@@ -48,3 +48,11 @@ After every source-code update, before returning the completed work to the user:
 3. Invoke the project `test-ui` skill at `.cursor/skills/test-ui/SKILL.md` and run the entire UI test plan.
 4. Do not report the code update as complete unless all UI tests pass. If a test fails, report the actual and expected output and fix the problem before rerunning.
 5. Report the final test-session result, including the console input and output, to the user.
+
+## JUnit testing
+
+Maintain JUnit coverage for the top 50% highest-value methods, prioritizing complex,
+core, and critical business logic. Update the relevant JUnit tests after each code
+change so this target continues to be met. Place tests in `src/test/java` using the
+same package and a `ClassUnderTestTest` name, and include reasonable successful,
+boundary, and invalid-input cases.
