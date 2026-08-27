@@ -102,7 +102,8 @@ public class Parser {
             throw new AlfredException("Alfred needs a task number after `" + commandName + "`.");
         }
         if (taskCount == 0) {
-            throw new AlfredException("Alfred's task list is empty, so there is nothing to " + commandName + ".");
+            throw new AlfredException("Alfred's task list is empty, so there is nothing to "
+                    + commandName + ".");
         }
 
         int taskNumber;
@@ -128,7 +129,8 @@ public class Parser {
             }
             throw new AlfredException("Alfred needs `/by` followed by a due time for a deadline.");
         }
-        String description = input.substring(CommandType.DEADLINE.getKeyword().length(), byMarkerIndex).trim();
+        String description = input.substring(CommandType.DEADLINE.getKeyword().length(), byMarkerIndex)
+                .trim();
         String by = input.substring(byMarkerIndex + 5).trim();
         if (description.isEmpty()) {
             throw new AlfredException("Alfred needs a deadline description before `/by`.");

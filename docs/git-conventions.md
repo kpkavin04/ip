@@ -1,6 +1,8 @@
 # Git Conventions
 
-This is a project summary of the [SE-EDU Git conventions](https://se-education.org/guides/conventions/git.html). Consult it before creating branches or commits.
+This is a project summary of the
+[SE-EDU Git conventions](https://se-education.org/guides/conventions/git.html). Consult it before
+creating branches or commits.
 
 ## Branch names
 
@@ -13,15 +15,18 @@ This is a project summary of the [SE-EDU Git conventions](https://se-education.o
 - Use imperative mood: `Add storage support`, not `Added storage support`.
 - Capitalize the first word and do not end the subject with a period.
 - Aim for 50 characters; never exceed 72 characters.
-- An optional scope or category prefix may improve clarity, for example `Storage: Save task updates` or `bug fix: Reject empty descriptions`.
+- An optional scope or category prefix may improve clarity, for example `Storage: Save task
+  updates` or `bug fix: Reject empty descriptions`.
 
 ## Commit body
 
 - Give non-trivial commits a body, separated from the subject by one blank line.
 - Wrap body lines at 72 characters and separate paragraphs with blank lines. Use bullets when helpful.
 - Explain **what** changed and **why**; leave implementation details for the diff.
-- For every non-trivial commit, the body **must** cover: the current situation, why it should change, the imperative change being made, why that approach was chosen, and any relevant context.
-- Use present tense for the current situation and imperative mood for the proposed change. Avoid redundant words such as “currently” or “originally”.
+- A useful structure is: current situation, why it should change, the imperative change being
+  made, why that approach was chosen, and any other relevant context.
+- Use present tense for the current situation and imperative mood for the proposed change. Avoid
+  redundant words such as “currently” or “originally”.
 - Do not repeat information that is already clear from code comments in the same change.
 - If the explanation is becoming long, consider splitting the change into smaller, focused commits.
 

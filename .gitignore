@@ -3,7 +3,7 @@
 /out/
 /*.iml
 
-# Gradle build files
+# Gradle-generated files
 /.gradle/
 /build/
 src/main/resources/docs/

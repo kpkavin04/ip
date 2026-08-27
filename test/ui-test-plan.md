@@ -2,7 +2,8 @@
 
 ## Start with no saved task file
 
-**Aim:** Verify that Alfred starts with an empty task list when its relative data directory and file do not exist yet.
+**Aim:** Verify that Alfred starts with an empty task list when its relative data directory and
+file do not exist yet.
 
 ### Input
 ```text
@@ -44,7 +45,8 @@ ____________________________________________________________
 
 ## Load saved task state after a restart
 
-**Aim:** Verify that add, mark, unmark, and delete changes are saved, then that every task type, date/time field, and completion status is restored by a fresh Alfred session.
+**Aim:** Verify that add, mark, unmark, and delete changes are saved, then that every task type,
+date/time field, and completion status is restored by a fresh Alfred session.
 
 ### Setup input
 ```text
@@ -102,7 +104,8 @@ ____________________________________________________________
 
 ## Add, update, and list all task types
 
-**Aim:** Verify that ToDos, Deadlines, and Events are stored, formatted, marked, unmarked, and listed correctly.
+**Aim:** Verify that ToDos, Deadlines, and Events are stored, formatted, marked, unmarked, and
+listed correctly.
 
 ### Input
 ```text
@@ -175,7 +178,8 @@ ____________________________________________________________
 
 ## Delete a task and renumber the remaining list
 
-**Aim:** Verify that deletion removes the requested task, preserves the other task types and statuses, and rejects an invalid task number.
+**Aim:** Verify that deletion removes the requested task, preserves the other task types and
+statuses, and rejects an invalid task number.
 
 ### Input
 ```text
@@ -534,7 +538,8 @@ ____________________________________________________________
 
 ## Validate delete inputs and the empty-list lifecycle
 
-**Aim:** Verify every delete-number error category, deletion of the final task, and listing an empty task collection.
+**Aim:** Verify every delete-number error category, deletion of the final task, and listing an
+empty task collection.
 
 ### Input
 ```text
