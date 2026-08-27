@@ -14,6 +14,7 @@ import alfred.command.AddCommand;
 import alfred.command.Command;
 import alfred.command.DeleteCommand;
 import alfred.command.ExitCommand;
+import alfred.command.FindCommand;
 import alfred.command.ListCommand;
 import alfred.command.MarkCommand;
 import alfred.command.UnmarkCommand;
@@ -37,6 +38,7 @@ class ParserTest {
     void parseCommand_nonTaskCommands_returnsMatchingCommandTypes() throws AlfredException {
         assertInstanceOf(ExitCommand.class, parser.parseCommand("bye", 1));
         assertInstanceOf(ListCommand.class, parser.parseCommand("list", 1));
+        assertInstanceOf(FindCommand.class, parser.parseCommand("find book", 1));
         assertInstanceOf(MarkCommand.class, parser.parseCommand("mark 1", 1));
         assertInstanceOf(UnmarkCommand.class, parser.parseCommand("unmark 1", 1));
         assertInstanceOf(DeleteCommand.class, parser.parseCommand("delete 1", 1));
@@ -103,6 +105,8 @@ class ParserTest {
 
     @Test
     void parseCommand_invalidTaskDetails_exceptionWithSpecificGuidanceThrown() {
+        assertError("Alfred needs a keyword after `find`.",
+                () -> parser.parseCommand("find", 0));
         assertError("Alfred cannot add a to-do without a mission description.",
                 () -> parser.parseCommand("todo", 0));
         assertError("Alfred needs `/by` followed by a due time for a deadline.",

@@ -44,6 +44,23 @@ public class TaskList implements Iterable<Task> {
         return tasks.size();
     }
 
+    /**
+     * Returns tasks whose descriptions contain the keyword, ignoring letter case.
+     *
+     * @param keyword text to look for in task descriptions
+     * @return matching tasks in their original list order
+     */
+    public List<Task> findTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        String lowerCaseKeyword = keyword.toLowerCase();
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase().contains(lowerCaseKeyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     /** Returns an iterator over the tasks in their list order. */
     @Override
     public Iterator<Task> iterator() {

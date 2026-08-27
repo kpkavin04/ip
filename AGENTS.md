@@ -36,7 +36,12 @@ governs branch names and commit messages whenever Git history is changed.
 ## Git
 
 Use lightweight tags unless the user requests an annotated tag.
-When proposing or creating a commit message, include enough detail to explain the rationale for the change.
+When proposing or creating a commit message, first read and follow
+`docs/git-conventions.md`, even if no code change is being made. For every
+non-trivial change, provide both a subject and a body. The body must explain
+the current situation, why it should change, the imperative change being made,
+why that approach was chosen, and any relevant context. Do not provide a
+subject-only message unless the change is clearly trivial.
 Do not commit or push unless explicitly asked.
 
 ## UI testing
