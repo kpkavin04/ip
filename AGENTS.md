@@ -1,10 +1,13 @@
 # Project context
 
-This repository is a starter template for a greenfield Java project used in an introductory software engineering course in an undergraduate computer science program. Students use it as the starting point for their own projects.
+This repository is a starter template for a greenfield Java project used in an introductory
+software engineering course in an undergraduate computer science program. Students use it as
+the starting point for their own projects.
 
 # Default user context
 
-Unless the user says otherwise, assume that you are assisting a student working on a project in this repository.
+Unless the user says otherwise, assume that you are assisting a student working on a project in
+this repository.
 
 # Student profile
 
@@ -17,9 +20,12 @@ Unless the user says otherwise, assume that you are assisting a student working 
 * Briefly explain the rationale for significant actions: what you did and why.
 * Interaction examples:
   * When suggesting a Git command, briefly explain what it does.
-  * Add explanatory Javadoc comments to all classes and to nontrivial methods and fields when their purpose or behavior is not obvious.
-  * Make generated code as self-explanatory as possible, and include explanatory comments where they improve understanding.
-  * When faced with a design choice, choose the simplest option that is sufficient for the requirements, while briefly explaining relevant more advanced alternatives.
+  * Add explanatory Javadoc comments to all classes and to nontrivial methods and fields when
+    their purpose or behavior is not obvious.
+  * Make generated code as self-explanatory as possible, and include explanatory comments where
+    they improve understanding.
+  * When faced with a design choice, choose the simplest option that is sufficient for the
+    requirements, while briefly explaining relevant more advanced alternatives.
 
 # Project-specific requirements
 
@@ -44,9 +50,11 @@ Do not commit or push unless explicitly asked.
 After every source-code update, before returning the completed work to the user:
 
 1. Review `test/ui-test-plan.md` against all behavior implemented so far.
-2. Add or update cases when behavior, commands, errors, or state transitions change. Include both successful and invalid inputs, and verify that rejected inputs do not corrupt task state.
+2. Add or update cases when behavior, commands, errors, or state transitions change. Include
+   both successful and invalid inputs, and verify that rejected inputs do not corrupt task state.
 3. Invoke the project `test-ui` skill at `.cursor/skills/test-ui/SKILL.md` and run the entire UI test plan.
-4. Do not report the code update as complete unless all UI tests pass. If a test fails, report the actual and expected output and fix the problem before rerunning.
+4. Do not report the code update as complete unless all UI tests pass. If a test fails, report the
+   actual and expected output and fix the problem before rerunning.
 5. Report the final test-session result, including the console input and output, to the user.
 
 ## JUnit testing
