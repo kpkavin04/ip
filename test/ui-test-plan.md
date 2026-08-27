@@ -678,3 +678,85 @@ ____________________________________________________________
 Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
+
+## Find matching task descriptions
+
+**Aim:** Verify that find matches descriptions case-insensitively, reports no matches, rejects a missing keyword, and preserves task state.
+
+### Input
+```text
+todo read book
+deadline return BOOK /by 2019-06-06
+event project meeting /from 2019-06-01 /to 2019-06-02
+mark 1
+find book
+find report
+find
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
+    _    _  __             _
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] read book
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] return BOOK (by: Jun 06 2019)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] project meeting (from: Jun 01 2019 to: Jun 02 2019)
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+  [T][X] read book
+____________________________________________________________
+____________________________________________________________
+Here are the matching tasks in your list:
+1.[T][X] read book
+2.[D][ ] return BOOK (by: Jun 06 2019)
+____________________________________________________________
+____________________________________________________________
+Here are the matching tasks in your list:
+____________________________________________________________
+____________________________________________________________
+Alfred needs a keyword after `find`.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][X] read book
+2.[D][ ] return BOOK (by: Jun 06 2019)
+3.[E][ ] project meeting (from: Jun 01 2019 to: Jun 02 2019)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```

@@ -6,6 +6,7 @@ import alfred.command.AddCommand;
 import alfred.command.Command;
 import alfred.command.DeleteCommand;
 import alfred.command.ExitCommand;
+import alfred.command.FindCommand;
 import alfred.command.ListCommand;
 import alfred.command.MarkCommand;
 import alfred.command.UnmarkCommand;
@@ -41,6 +42,9 @@ public class Parser {
         if (commandType == CommandType.LIST) {
             return new ListCommand();
         }
+        if (commandType == CommandType.FIND) {
+            return new FindCommand(parseFindKeyword(input));
+        }
         if (commandType == CommandType.MARK) {
             return new MarkCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
         }
@@ -51,6 +55,15 @@ public class Parser {
             return new DeleteCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
         }
         return new AddCommand(parseTask(input, commandType));
+    }
+
+    /** Parses the keyword supplied to a find command. */
+    private String parseFindKeyword(String input) throws AlfredException {
+        String keyword = input.substring(CommandType.FIND.getKeyword().length()).trim();
+        if (keyword.isEmpty()) {
+            throw new AlfredException("Alfred needs a keyword after `find`.");
+        }
+        return keyword;
     }
 
     /**
