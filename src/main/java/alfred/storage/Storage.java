@@ -20,6 +20,21 @@ import alfred.task.Todo;
  */
 public class Storage {
     private static final Path FILE_PATH = Path.of("data", "alfred.txt");
+    private final Path filePath;
+
+    /** Creates storage using Alfred's default task file location. */
+    public Storage() {
+        this(FILE_PATH);
+    }
+
+    /**
+     * Creates storage using the specified task file location.
+     *
+     * @param filePath location of the task file
+     */
+    public Storage(Path filePath) {
+        this.filePath = filePath;
+    }
 
     /**
      * Loads all saved tasks. A missing data file represents an empty task list.
@@ -29,12 +44,12 @@ public class Storage {
      */
     public ArrayList<Task> load() throws AlfredException {
         ArrayList<Task> tasks = new ArrayList<>();
-        if (!Files.exists(FILE_PATH)) {
+        if (!Files.exists(filePath)) {
             return tasks;
         }
 
         try {
-            for (String line : Files.readAllLines(FILE_PATH, StandardCharsets.UTF_8)) {
+            for (String line : Files.readAllLines(filePath, StandardCharsets.UTF_8)) {
                 if (!line.isEmpty()) {
                     tasks.add(deserialise(line));
                 }
@@ -58,8 +73,8 @@ public class Storage {
         }
 
         try {
-            Files.createDirectories(FILE_PATH.getParent());
-            Files.write(FILE_PATH, lines, StandardCharsets.UTF_8);
+            Files.createDirectories(filePath.getParent());
+            Files.write(filePath, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new AlfredException("Alfred could not save the tasks.");
         }
