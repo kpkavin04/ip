@@ -1,3 +1,5 @@
+package alfred.task;
+
 /**
  * Represents one task in Alfred's task list.
  */

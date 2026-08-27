@@ -1,3 +1,5 @@
+package alfred.exception;
+
 /**
  * Represents an error caused by an invalid command entered into Alfred.
  */

@@ -1,3 +1,10 @@
+package alfred.command;
+
+import alfred.exception.AlfredException;
+import alfred.storage.Storage;
+import alfred.task.TaskList;
+import alfred.ui.Ui;
+
 /**
  * Represents an executable user command.
  */
