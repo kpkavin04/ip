@@ -1,5 +1,35 @@
 # Duke project template
 
+## Creating and running the executable JAR
+
+This project uses the Shadow Gradle plugin to create a fat JAR: an executable JAR that
+includes the application's runtime dependencies. From the project root, run:
+
+```sh
+./gradlew shadowJar
+```
+
+On Windows Command Prompt, run:
+
+```bat
+gradlew.bat shadowJar
+```
+
+Gradle creates the distributable file at `build/libs/alfred.jar`. Do not commit this
+generated JAR; the `build/` directory is already ignored by Git. To distribute the
+application, attach this JAR to a GitHub release instead.
+
+To run it, copy `alfred.jar` into an empty folder, open a command window in that folder,
+and run:
+
+```sh
+java -jar "alfred.jar"
+```
+
+The computer running the JAR needs Java 25 or a compatible newer Java runtime. Running
+the command from the JAR's folder ensures that Alfred stores its task data in that
+folder.
+
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
 ## Setting up in Intellij
