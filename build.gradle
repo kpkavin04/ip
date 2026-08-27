@@ -22,6 +22,14 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.14.4'
 }
 
+tasks.register('uiTest', Exec) {
+    group = 'verification'
+    description = 'Runs the console UI test cases in test/ui-test-plan.md.'
+
+    workingDir projectDir
+    commandLine 'python3', '.cursor/skills/test-ui/scripts/run_ui_tests.py'
+}
+
 test {
     useJUnitPlatform()
 
@@ -34,10 +42,12 @@ test {
         showStackTraces = true
         showStandardStreams = false
     }
+
+    dependsOn tasks.named('uiTest')
 }
 
 application {
-    mainClass = 'seedu.duke.Duke'
+    mainClass = 'alfred.Alfred'
 }
 
 jar {
