@@ -1,3 +1,5 @@
+package alfred.parser;
+
 /**
  * Defines the command keywords Alfred recognizes in user input.
  */

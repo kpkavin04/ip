@@ -1,3 +1,9 @@
+package alfred.command;
+
+import alfred.storage.Storage;
+import alfred.task.TaskList;
+import alfred.ui.Ui;
+
 /**
  * Ends the Alfred session.
  */

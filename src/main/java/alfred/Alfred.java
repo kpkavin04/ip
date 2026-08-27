@@ -1,3 +1,12 @@
+package alfred;
+
+import alfred.command.Command;
+import alfred.exception.AlfredException;
+import alfred.parser.Parser;
+import alfred.storage.Storage;
+import alfred.task.TaskList;
+import alfred.ui.Ui;
+
 /**
  * Coordinates Alfred's user interface, task storage, and command execution.
  */

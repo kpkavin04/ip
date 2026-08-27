@@ -1,4 +1,9 @@
+package alfred.ui;
+
 import java.util.Scanner;
+
+import alfred.task.Task;
+import alfred.task.TaskList;
 
 /**
  * Handles Alfred's console input and output.

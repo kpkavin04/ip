@@ -1,3 +1,5 @@
+package alfred.task;
+
 /**
  * Defines the kinds of tasks Alfred can store and their list display codes.
  */

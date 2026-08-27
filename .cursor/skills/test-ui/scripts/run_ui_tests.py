@@ -31,7 +31,7 @@ def load_cases():
 
 def compile_program(output_directory):
     """Compile all Java source files into the supplied temporary directory."""
-    source_files = sorted(SOURCE_DIRECTORY.glob("*.java"))
+    source_files = sorted(SOURCE_DIRECTORY.rglob("*.java"))
     result = subprocess.run(
         ["javac", "-d", str(output_directory), *map(str, source_files)],
         cwd=PROJECT_ROOT,
@@ -69,7 +69,7 @@ def main():
             if setup is not None:
                 setup_input = setup + "\n"
                 setup_result = subprocess.run(
-                    ["java", "-cp", temporary_directory, "Alfred"],
+                    ["java", "-cp", temporary_directory, "alfred.Alfred"],
                     cwd=case_directory,
                     input=setup_input,
                     text=True,
@@ -81,7 +81,7 @@ def main():
                     print("FAIL: setup session did not exit successfully.")
                     sys.exit(1)
             result = subprocess.run(
-                ["java", "-cp", temporary_directory, "Alfred"],
+                ["java", "-cp", temporary_directory, "alfred.Alfred"],
                 cwd=case_directory,
                 input=console_input,
                 text=True,
