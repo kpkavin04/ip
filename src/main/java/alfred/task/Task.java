@@ -4,9 +4,9 @@ package alfred.task;
  * Represents one task in Alfred's task list.
  */
 public class Task {
-    private final TaskType type;
     protected final String description;
     protected boolean isDone;
+    private final TaskType type;
 
     /**
      * Creates an incomplete task with the given type and description.
