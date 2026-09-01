@@ -26,8 +26,8 @@ class TaskDateTimeTest {
 
     @Test
     void parse_invalidDateOrFormat_exceptionWithUserGuidanceThrown() {
-        AlfredException exception = assertThrows(AlfredException.class,
-                () -> TaskDateTime.parse("2023-02-29"));
+        AlfredException exception = assertThrows(AlfredException.class, () ->
+                TaskDateTime.parse("2023-02-29"));
 
         assertEquals("Alfred needs a valid date in yyyy-MM-dd or d/M/yyyy HHmm format.",
                 exception.getMessage());
@@ -42,8 +42,8 @@ class TaskDateTimeTest {
 
     @Test
     void parseStored_invalidValue_exceptionWithStorageErrorThrown() {
-        AlfredException exception = assertThrows(AlfredException.class,
-                () -> TaskDateTime.parseStored("29/02/2024 2359"));
+        AlfredException exception = assertThrows(AlfredException.class, () ->
+                TaskDateTime.parseStored("29/02/2024 2359"));
 
         assertEquals("Alfred could not load the saved tasks.", exception.getMessage());
     }

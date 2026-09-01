@@ -29,10 +29,10 @@ import alfred.task.Todo;
 import alfred.ui.Ui;
 
 class ParserTest {
-    private final Parser parser = new Parser();
-
     @TempDir
     Path temporaryDirectory;
+
+    private final Parser parser = new Parser();
 
     @Test
     void parseCommand_nonTaskCommands_returnsMatchingCommandTypes() throws AlfredException {
@@ -79,58 +79,58 @@ class ParserTest {
 
     @Test
     void parseTaskIndex_missingNumber_exceptionWithGuidanceThrown() {
-        assertError("Alfred needs a task number after `mark`.",
-                () -> parser.parseTaskIndex("mark", "mark", 3));
+        assertError("Alfred needs a task number after `mark`.", () ->
+                parser.parseTaskIndex("mark", "mark", 3));
     }
 
     @Test
     void parseTaskIndex_emptyTaskList_exceptionWithGuidanceThrown() {
-        assertError("Alfred's task list is empty, so there is nothing to delete.",
-                () -> parser.parseTaskIndex("delete 1", "delete", 0));
+        assertError("Alfred's task list is empty, so there is nothing to delete.", () ->
+                parser.parseTaskIndex("delete 1", "delete", 0));
     }
 
     @Test
     void parseTaskIndex_nonNumericNumber_exceptionWithGuidanceThrown() {
-        assertError("Alfred needs a whole-number task number after `unmark`.",
-                () -> parser.parseTaskIndex("unmark two", "unmark", 3));
+        assertError("Alfred needs a whole-number task number after `unmark`.", () ->
+                parser.parseTaskIndex("unmark two", "unmark", 3));
     }
 
     @Test
     void parseTaskIndex_outOfRangeNumber_exceptionWithGuidanceThrown() {
-        assertError("Alfred cannot find task 0. Choose a number from 1 to 3.",
-                () -> parser.parseTaskIndex("mark 0", "mark", 3));
-        assertError("Alfred cannot find task 4. Choose a number from 1 to 3.",
-                () -> parser.parseTaskIndex("mark 4", "mark", 3));
+        assertError("Alfred cannot find task 0. Choose a number from 1 to 3.", () ->
+                parser.parseTaskIndex("mark 0", "mark", 3));
+        assertError("Alfred cannot find task 4. Choose a number from 1 to 3.", () ->
+                parser.parseTaskIndex("mark 4", "mark", 3));
     }
 
     @Test
     void parseCommand_invalidTaskDetails_exceptionWithSpecificGuidanceThrown() {
-        assertError("Alfred needs a keyword after `find`.",
-                () -> parser.parseCommand("find", 0));
-        assertError("Alfred cannot add a to-do without a mission description.",
-                () -> parser.parseCommand("todo", 0));
-        assertError("Alfred needs `/by` followed by a due time for a deadline.",
-                () -> parser.parseCommand("deadline submit report", 0));
-        assertError("Alfred needs a deadline description before `/by`.",
-                () -> parser.parseCommand("deadline /by 2019-12-02", 0));
-        assertError("Alfred needs a due time after `/by`.",
-                () -> parser.parseCommand("deadline submit report /by", 0));
-        assertError("Alfred needs `/from` followed by a start time for an event.",
-                () -> parser.parseCommand("event project meeting", 0));
-        assertError("Alfred needs `/to` followed by an end time for an event.",
-                () -> parser.parseCommand("event project meeting /from 2019-12-02", 0));
-        assertError("Alfred needs an event description before `/from`.",
-                () -> parser.parseCommand("event /from 2019-12-02 /to 2019-12-03", 0));
-        assertError("Alfred needs a start time after `/from`.",
-                () -> parser.parseCommand("event project /from  /to 2019-12-03", 0));
-        assertError("Alfred needs an end time after `/to`.",
-                () -> parser.parseCommand("event project /from 2019-12-02 /to", 0));
+        assertError("Alfred needs a keyword after `find`.", () ->
+                parser.parseCommand("find", 0));
+        assertError("Alfred cannot add a to-do without a mission description.", () ->
+                parser.parseCommand("todo", 0));
+        assertError("Alfred needs `/by` followed by a due time for a deadline.", () ->
+                parser.parseCommand("deadline submit report", 0));
+        assertError("Alfred needs a deadline description before `/by`.", () ->
+                parser.parseCommand("deadline /by 2019-12-02", 0));
+        assertError("Alfred needs a due time after `/by`.", () ->
+                parser.parseCommand("deadline submit report /by", 0));
+        assertError("Alfred needs `/from` followed by a start time for an event.", () ->
+                parser.parseCommand("event project meeting", 0));
+        assertError("Alfred needs `/to` followed by an end time for an event.", () ->
+                parser.parseCommand("event project meeting /from 2019-12-02", 0));
+        assertError("Alfred needs an event description before `/from`.", () ->
+                parser.parseCommand("event /from 2019-12-02 /to 2019-12-03", 0));
+        assertError("Alfred needs a start time after `/from`.", () ->
+                parser.parseCommand("event project /from  /to 2019-12-03", 0));
+        assertError("Alfred needs an end time after `/to`.", () ->
+                parser.parseCommand("event project /from 2019-12-02 /to", 0));
     }
 
     @Test
     void parseCommand_unknownCommand_exceptionWithGuidanceThrown() {
-        assertError("Alfred does not recognize that command. Please try again.",
-                () -> parser.parseCommand("remind me", 0));
+        assertError("Alfred does not recognize that command. Please try again.", () ->
+                parser.parseCommand("remind me", 0));
     }
 
     private Task getAddedTask(String input) throws AlfredException {
