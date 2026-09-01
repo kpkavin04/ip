@@ -525,7 +525,7 @@ ____________________________________________________________
 Alfred cannot add a to-do without a mission description.
 ____________________________________________________________
 ____________________________________________________________
-Alfred does not recognize that command. Please try again.
+I do not recognise that command. Come again.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
@@ -765,3 +765,16 @@ ____________________________________________________________
 Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
+
+## Manual JavaFX verification
+
+Run `./gradlew run`. The resizable Alfred window should open with a scrollable dialog area, a
+text field, and a Send button. It must show Alfred's `How can I assist from the cave?` welcome
+message before any user input. Enter `todo read book` and press Enter; the response must confirm
+that the task was added. Then enter `list` and click Send; the response must include the saved
+task. Enter `todo` and verify the error response does not remove the task shown by a final `list`.
+Enter enough commands to verify that the scroll pane follows the newest dialog. Resize the window
+to verify that the scroll area and text field grow with it while Send remains at the bottom-right.
+Finally, enter `bye`; Alfred must show the farewell response and then close the window. Enter an
+invalid command before `bye` to verify that only a valid exit command closes the application.
+This check is manual because the console UI test runner has no access to a desktop window.

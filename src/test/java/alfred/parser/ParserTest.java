@@ -129,7 +129,7 @@ class ParserTest {
 
     @Test
     void parseCommand_unknownCommand_exceptionWithGuidanceThrown() {
-        assertError("Alfred does not recognize that command. Please try again.", () ->
+        assertError("I do not recognise that command. Come again.", () ->
                 parser.parseCommand("remind me", 0));
     }
 
