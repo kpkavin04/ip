@@ -1,7 +1,11 @@
 package alfred.ui;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -13,7 +17,10 @@ import javafx.scene.layout.HBox;
  * Displays one chat message and its corresponding avatar.
  */
 public class DialogBox extends HBox {
-    private static final double AVATAR_SIZE = 100.0;
+    @FXML
+    private Label dialog;
+    @FXML
+    private ImageView displayPicture;
 
     /**
      * Creates a dialog containing a message and an avatar.
@@ -21,15 +28,10 @@ public class DialogBox extends HBox {
      * @param message message displayed in the dialog.
      * @param avatar image displayed beside the message.
      */
-    public DialogBox(String message, Image avatar) {
-        Label text = new Label(message);
-        ImageView displayPicture = new ImageView(avatar);
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(AVATAR_SIZE);
-        displayPicture.setFitHeight(AVATAR_SIZE);
-        setAlignment(Pos.TOP_RIGHT);
-        getChildren().addAll(text, displayPicture);
+    private DialogBox(String message, Image avatar) {
+        loadFxml();
+        dialog.setText(message);
+        displayPicture.setImage(avatar);
     }
 
     /**
@@ -54,6 +56,20 @@ public class DialogBox extends HBox {
         DialogBox dialogBox = new DialogBox(message, avatar);
         dialogBox.flip();
         return dialogBox;
+    }
+
+    /**
+     * Loads the dialog's FXML view into this custom control.
+     */
+    private void loadFxml() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new IllegalStateException("Unable to load Alfred's dialog box.", e);
+        }
     }
 
     /**
