@@ -765,3 +765,9 @@ ____________________________________________________________
 Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
+
+## Manual JavaFX verification
+
+Run `./gradlew run`. A window should open with the text `Hello World!`; closing it should end
+the application. This check is manual because the console UI test runner has no access to a
+desktop window.
