@@ -24,6 +24,16 @@ public class Alfred {
     }
 
     /**
+     * Generates Alfred's response to a GUI message.
+     *
+     * @param input message received from the user.
+     * @return response displayed in the GUI.
+     */
+    public String getResponse(String input) {
+        return "Alfred heard: " + input;
+    }
+
+    /**
      * Greets the user, loads saved tasks, and executes commands until the user exits.
      */
     public void run() {

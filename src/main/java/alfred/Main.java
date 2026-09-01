@@ -24,7 +24,11 @@ public class Main extends Application {
     private static final double SEND_BUTTON_WIDTH = 55.0;
     private static final double ANCHOR_OFFSET = 1.0;
 
+    private final Alfred alfred = new Alfred();
     private final Image userImage = loadImage("/images/User.png");
+    private final Image alfredImage = loadImage("/images/Alfred.png");
+    private VBox dialogContainer;
+    private TextField userInput;
 
     /**
      * Creates and displays the application's primary window.
@@ -34,12 +38,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         ScrollPane scrollPane = new ScrollPane();
-        VBox dialogContainer = new VBox();
-        TextField userInput = new TextField();
+        dialogContainer = new VBox();
+        userInput = new TextField();
         Button sendButton = new Button("Send");
 
         scrollPane.setContent(dialogContainer);
-        dialogContainer.getChildren().add(new DialogBox("Hello!", userImage));
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -48,6 +51,22 @@ public class Main extends Application {
         Scene scene = new Scene(mainLayout);
         stage.setScene(scene);
         stage.show();
+
+        sendButton.setOnMouseClicked(event -> handleUserInput());
+        userInput.setOnAction(event -> handleUserInput());
+        dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Appends the user's message and Alfred's response, then clears the input field.
+     */
+    private void handleUserInput() {
+        String userText = userInput.getText();
+        String alfredText = alfred.getResponse(userText);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getAlfredDialog(alfredText, alfredImage));
+        userInput.clear();
     }
 
     /**

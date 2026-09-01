@@ -769,7 +769,7 @@ ____________________________________________________________
 ## Manual JavaFX verification
 
 Run `./gradlew run`. The fixed-size Alfred window should open with a scrollable dialog area, a
-sample message and avatar, a text field, and a Send button. The text field and button must not
-execute commands yet; interaction is introduced in Part 3. Closing the window should end the
-application. This check is manual because the console UI test runner has no access to a desktop
-window.
+text field, and a Send button. Entering `hello` and pressing Enter must append `hello` on the
+right and `Alfred heard: hello` on the left, then clear the text field. Repeat the check by
+clicking Send. Enter enough messages to verify that the scroll pane follows the newest dialog.
+This check is manual because the console UI test runner has no access to a desktop window.
