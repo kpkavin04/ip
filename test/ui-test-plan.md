@@ -769,9 +769,10 @@ ____________________________________________________________
 ## Manual JavaFX verification
 
 Run `./gradlew run`. The resizable Alfred window should open with a scrollable dialog area, a
-text field, and a Send button. Entering `hello` and pressing Enter must append `hello` on the
-right and `Alfred heard: hello` on the left, then clear the text field. Repeat the check by
-clicking Send. Enter enough messages to verify that the scroll pane follows the newest dialog.
-Resize the window to verify that the scroll area and text field grow with it while Send remains
-at the bottom-right. This check is manual because the console UI test runner has no access to a
-desktop window.
+text field, and a Send button. It must show Alfred's `How can I assist from the cave?` welcome
+message before any user input. Enter `todo read book` and press Enter; the response must confirm
+that the task was added. Then enter `list` and click Send; the response must include the saved
+task. Enter `todo` and verify the error response does not remove the task shown by a final `list`.
+Enter enough commands to verify that the scroll pane follows the newest dialog. Resize the window
+to verify that the scroll area and text field grow with it while Send remains at the bottom-right.
+This check is manual because the console UI test runner has no access to a desktop window.

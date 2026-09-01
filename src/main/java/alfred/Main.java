@@ -16,7 +16,7 @@ public class Main extends Application {
     private static final double WINDOW_WIDTH = 400.0;
     private static final double WINDOW_HEIGHT = 600.0;
 
-    private final Alfred alfred = new Alfred();
+    private final Alfred alfred = Alfred.createGuiAlfred();
 
     /**
      * Loads and displays the application's primary window.

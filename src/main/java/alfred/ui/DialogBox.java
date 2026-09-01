@@ -53,8 +53,21 @@ public class DialogBox extends HBox {
      * @return Alfred dialog.
      */
     public static DialogBox getAlfredDialog(String message, Image avatar) {
+        return getAlfredDialog(message, avatar, null);
+    }
+
+    /**
+     * Creates a left-aligned dialog for an Alfred response with command-specific styling.
+     *
+     * @param message message displayed in the dialog.
+     * @param avatar image displayed beside the message.
+     * @param commandType type of command that produced the response.
+     * @return Alfred dialog.
+     */
+    public static DialogBox getAlfredDialog(String message, Image avatar, String commandType) {
         DialogBox dialogBox = new DialogBox(message, avatar);
         dialogBox.flip();
+        dialogBox.changeDialogStyle(commandType);
         return dialogBox;
     }
 
@@ -81,5 +94,22 @@ public class DialogBox extends HBox {
         FXCollections.reverse(children);
         getChildren().setAll(children);
         dialog.getStyleClass().add("reply-label");
+    }
+
+    /**
+     * Adds a visual cue for responses that change task state or reject input.
+     *
+     * @param commandType type of command that produced the response.
+     */
+    private void changeDialogStyle(String commandType) {
+        if ("AddCommand".equals(commandType)) {
+            dialog.getStyleClass().add("add-label");
+        } else if ("MarkCommand".equals(commandType) || "UnmarkCommand".equals(commandType)) {
+            dialog.getStyleClass().add("marked-label");
+        } else if ("DeleteCommand".equals(commandType)) {
+            dialog.getStyleClass().add("delete-label");
+        } else if ("Error".equals(commandType)) {
+            dialog.getStyleClass().add("error-label");
+        }
     }
 }

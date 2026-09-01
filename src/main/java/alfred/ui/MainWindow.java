@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
  * Controls the main JavaFX chat window.
  */
 public class MainWindow {
+    private static final String WELCOME_MESSAGE = "How can I assist from the cave?";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -37,6 +39,7 @@ public class MainWindow {
      */
     public void setAlfred(Alfred alfred) {
         this.alfred = alfred;
+        dialogContainer.getChildren().add(DialogBox.getAlfredDialog(WELCOME_MESSAGE, alfredImage));
     }
 
     /**
@@ -46,9 +49,10 @@ public class MainWindow {
     private void handleUserInput() {
         String userText = userInput.getText();
         String alfredText = alfred.getResponse(userText);
+        String commandType = alfred.getLastCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getAlfredDialog(alfredText, alfredImage));
+                DialogBox.getAlfredDialog(alfredText, alfredImage, commandType));
         userInput.clear();
     }
 

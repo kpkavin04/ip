@@ -14,13 +14,37 @@ public class Alfred {
     private final Storage storage;
     private final Parser parser;
     private final Ui ui;
+    private final StringBuilder responseBuffer;
     private TaskList tasks;
+    private String lastCommandType;
 
     /** Creates Alfred's collaborators. */
     public Alfred() {
-        storage = new Storage();
+        this(new Storage(), new Ui(), null);
+    }
+
+    /**
+     * Creates an Alfred instance with dependencies supplied by the caller.
+     *
+     * @param storage task storage used to persist tasks.
+     * @param ui user interface used to display responses.
+     * @param responseBuffer response buffer used by the GUI, or {@code null} for the console.
+     */
+    Alfred(Storage storage, Ui ui, StringBuilder responseBuffer) {
+        this.storage = storage;
         parser = new Parser();
-        ui = new Ui();
+        this.ui = ui;
+        this.responseBuffer = responseBuffer;
+    }
+
+    /**
+     * Creates an Alfred instance whose responses can be displayed in the GUI.
+     *
+     * @return Alfred instance configured for GUI responses.
+     */
+    public static Alfred createGuiAlfred() {
+        StringBuilder responseBuffer = new StringBuilder();
+        return new Alfred(new Storage(), new Ui(responseBuffer), responseBuffer);
     }
 
     /**
@@ -30,7 +54,30 @@ public class Alfred {
      * @return response displayed in the GUI.
      */
     public String getResponse(String input) {
-        return "Alfred heard: " + input;
+        if (responseBuffer == null) {
+            throw new IllegalStateException("Console Alfred cannot generate GUI responses.");
+        }
+
+        responseBuffer.setLength(0);
+        ensureTasksLoaded();
+        try {
+            Command command = parser.parseCommand(input, tasks.size());
+            command.execute(tasks, ui, storage);
+            lastCommandType = command.getClass().getSimpleName();
+        } catch (AlfredException e) {
+            lastCommandType = "Error";
+            ui.showError(e.getMessage());
+        }
+        return responseBuffer.toString().stripTrailing();
+    }
+
+    /**
+     * Returns the type of command that produced the latest GUI response.
+     *
+     * @return latest command type, or {@code Error} after rejected input.
+     */
+    public String getLastCommandType() {
+        return lastCommandType;
     }
 
     /**
@@ -68,6 +115,13 @@ public class Alfred {
         } catch (AlfredException e) {
             ui.showError(e.getMessage());
             return new TaskList();
+        }
+    }
+
+    /** Loads saved tasks before the GUI processes its first command. */
+    private void ensureTasksLoaded() {
+        if (tasks == null) {
+            tasks = loadTasks();
         }
     }
 

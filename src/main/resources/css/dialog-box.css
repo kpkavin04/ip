@@ -16,6 +16,22 @@
     -fx-border-radius: 1em 1em 1em 0;
 }
 
+.add-label {
+    -fx-background-color: #d9f2cf;
+    -fx-border-color: #5e8c4e;
+}
+
+.marked-label {
+    -fx-background-color: #d7edf5;
+    -fx-border-color: #4f7e95;
+}
+
+.delete-label,
+.error-label {
+    -fx-background-color: #f8d7d4;
+    -fx-border-color: #a45a54;
+}
+
 #displayPicture {
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.4, 3, 3);
 }
