@@ -17,6 +17,7 @@ public class Alfred {
     private final StringBuilder responseBuffer;
     private TaskList tasks;
     private String lastCommandType;
+    private boolean isExitRequested;
 
     /** Creates Alfred's collaborators. */
     public Alfred() {
@@ -59,11 +60,13 @@ public class Alfred {
         }
 
         responseBuffer.setLength(0);
+        isExitRequested = false;
         ensureTasksLoaded();
         try {
             Command command = parser.parseCommand(input, tasks.size());
             command.execute(tasks, ui, storage);
             lastCommandType = command.getClass().getSimpleName();
+            isExitRequested = command.isExit();
         } catch (AlfredException e) {
             lastCommandType = "Error";
             ui.showError(e.getMessage());
@@ -78,6 +81,15 @@ public class Alfred {
      */
     public String getLastCommandType() {
         return lastCommandType;
+    }
+
+    /**
+     * Returns whether the latest GUI command requested that Alfred exit.
+     *
+     * @return true when the latest command is a valid exit command.
+     */
+    public boolean isExitRequested() {
+        return isExitRequested;
     }
 
     /**

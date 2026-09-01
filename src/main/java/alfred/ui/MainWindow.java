@@ -1,17 +1,20 @@
 package alfred.ui;
 
 import alfred.Alfred;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controls the main JavaFX chat window.
  */
 public class MainWindow {
     private static final String WELCOME_MESSAGE = "How can I assist from the cave?";
+    private static final Duration EXIT_DELAY = Duration.seconds(1.5);
 
     @FXML
     private ScrollPane scrollPane;
@@ -54,6 +57,19 @@ public class MainWindow {
                 DialogBox.getUserDialog(userText, userImage),
                 DialogBox.getAlfredDialog(alfredText, alfredImage, commandType));
         userInput.clear();
+
+        if (alfred.isExitRequested()) {
+            closeAfterFarewell();
+        }
+    }
+
+    /**
+     * Closes the application after leaving the farewell response visible briefly.
+     */
+    private void closeAfterFarewell() {
+        PauseTransition exitDelay = new PauseTransition(EXIT_DELAY);
+        exitDelay.setOnFinished(event -> userInput.getScene().getWindow().hide());
+        exitDelay.play();
     }
 
     /**

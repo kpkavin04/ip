@@ -84,7 +84,7 @@ public class Parser {
         if (commandType == CommandType.TODO) {
             return parseTodo(input);
         }
-        throw new AlfredException("Alfred does not recognize that command. Please try again.");
+        throw new AlfredException("I do not recognise that command. Come again.");
     }
 
     /**

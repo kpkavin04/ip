@@ -1,6 +1,7 @@
 package alfred;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 
@@ -35,6 +36,15 @@ class AlfredTest {
         assertEquals("Alfred cannot add a to-do without a mission description.", alfred.getResponse("todo"));
         assertEquals("Error", alfred.getLastCommandType());
         assertEquals("Here are the tasks in your list:\n1.[T][ ] read book", alfred.getResponse("list"));
+    }
+
+    @Test
+    void getResponse_byeRequestsExit() {
+        Alfred alfred = createGuiAlfred();
+
+        assertEquals("Bye. Hope to see you again soon sir!", alfred.getResponse("bye"));
+        assertEquals("ExitCommand", alfred.getLastCommandType());
+        assertTrue(alfred.isExitRequested());
     }
 
     /** Creates Alfred with temporary storage and a GUI response buffer. */
