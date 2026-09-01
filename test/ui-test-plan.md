@@ -768,6 +768,8 @@ ____________________________________________________________
 
 ## Manual JavaFX verification
 
-Run `./gradlew run`. A window should open with the text `Hello World!`; closing it should end
-the application. This check is manual because the console UI test runner has no access to a
-desktop window.
+Run `./gradlew run`. The fixed-size Alfred window should open with a scrollable dialog area, a
+sample message and avatar, a text field, and a Send button. The text field and button must not
+execute commands yet; interaction is introduced in Part 3. Closing the window should end the
+application. This check is manual because the console UI test runner has no access to a desktop
+window.
