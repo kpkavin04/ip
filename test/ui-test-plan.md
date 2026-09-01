@@ -768,8 +768,10 @@ ____________________________________________________________
 
 ## Manual JavaFX verification
 
-Run `./gradlew run`. The fixed-size Alfred window should open with a scrollable dialog area, a
+Run `./gradlew run`. The resizable Alfred window should open with a scrollable dialog area, a
 text field, and a Send button. Entering `hello` and pressing Enter must append `hello` on the
 right and `Alfred heard: hello` on the left, then clear the text field. Repeat the check by
 clicking Send. Enter enough messages to verify that the scroll pane follows the newest dialog.
-This check is manual because the console UI test runner has no access to a desktop window.
+Resize the window to verify that the scroll area and text field grow with it while Send remains
+at the bottom-right. This check is manual because the console UI test runner has no access to a
+desktop window.

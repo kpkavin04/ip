@@ -31,7 +31,6 @@ public class Main extends Application {
             Scene scene = new Scene(mainLayout);
 
             stage.setTitle("Alfred");
-            stage.setResizable(false);
             stage.setMinHeight(WINDOW_HEIGHT);
             stage.setMinWidth(WINDOW_WIDTH);
             stage.setScene(scene);
