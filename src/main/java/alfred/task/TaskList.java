@@ -3,6 +3,7 @@ package alfred.task;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Stores and manages Alfred's ordered collection of tasks.
@@ -54,14 +55,10 @@ public class TaskList implements Iterable<Task> {
      * @return matching tasks in their original list order
      */
     public List<Task> findTasks(String keyword) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
         String lowerCaseKeyword = keyword.toLowerCase();
-        for (Task task : tasks) {
-            if (task.getDescription().toLowerCase().contains(lowerCaseKeyword)) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
+        return tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(lowerCaseKeyword))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /** Returns an iterator over the tasks in their list order. */
