@@ -51,6 +51,7 @@ tasks.register('uiTest', Exec) {
 
 test {
     useJUnitPlatform()
+    enableAssertions = true
 
     testLogging {
         events 'passed', 'skipped', 'failed'
@@ -67,6 +68,7 @@ test {
 
 application {
     mainClass = 'alfred.Launcher'
+    applicationDefaultJvmArgs = ['-ea']
 }
 
 jar {
