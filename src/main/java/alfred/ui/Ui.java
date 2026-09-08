@@ -130,7 +130,7 @@ public class Ui {
         if (responseBuffer == null) {
             System.out.println(message);
         } else {
-            responseBuffer.append(message).append(System.lineSeparator());
+            responseBuffer.append(message).append('\n');
         }
     }
 }
