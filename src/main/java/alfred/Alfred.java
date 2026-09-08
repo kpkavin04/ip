@@ -63,8 +63,7 @@ public class Alfred {
         isExitRequested = false;
         ensureTasksLoaded();
         try {
-            Command command = parser.parseCommand(input, tasks.size());
-            command.execute(tasks, ui, storage);
+            Command command = executeCommand(input);
             lastCommandType = command.getClass().getSimpleName();
             isExitRequested = command.isExit();
         } catch (AlfredException e) {
@@ -105,8 +104,7 @@ public class Alfred {
             ui.showSeparator();
 
             try {
-                Command command = parser.parseCommand(commandInput, tasks.size());
-                command.execute(tasks, ui, storage);
+                Command command = executeCommand(commandInput);
                 isExit = command.isExit();
             } catch (AlfredException e) {
                 ui.showError(e.getMessage());
@@ -114,6 +112,14 @@ public class Alfred {
                 ui.showSeparator();
             }
         }
+    }
+
+    /** Parses and executes a command using the loaded task list. */
+    private Command executeCommand(String input) throws AlfredException {
+        assert tasks != null : "Tasks must be loaded before executing a command";
+        Command command = parser.parseCommand(input, tasks.size());
+        command.execute(tasks, ui, storage);
+        return command;
     }
 
     /**
