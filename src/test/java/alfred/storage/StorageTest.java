@@ -18,6 +18,7 @@ import alfred.task.Deadline;
 import alfred.task.Event;
 import alfred.task.Task;
 import alfred.task.TaskList;
+import alfred.task.TaskType;
 import alfred.task.Todo;
 
 class StorageTest {
@@ -51,6 +52,13 @@ class StorageTest {
         assertEquals("[D][X] submit report (by: Feb 29 2024 18:00)", loadedTasks.get(1).toString());
         assertEquals("[E][X] team meeting (from: Mar 01 2024 09:00 to: Mar 01 2024 10:30)",
                 loadedTasks.get(2).toString());
+    }
+
+    @Test
+    void save_taskTypeAndClassDisagree_assertionErrorThrown() {
+        TaskList tasks = new TaskList(new ArrayList<>(java.util.List.of(new IncorrectEventTask())));
+
+        assertThrows(AssertionError.class, () -> createStorage().save(tasks));
     }
 
     @Test
@@ -95,5 +103,12 @@ class StorageTest {
         AlfredException exception = assertThrows(AlfredException.class, () -> createStorage().load());
 
         assertEquals("Alfred could not load the saved tasks.", exception.getMessage());
+    }
+
+    /** Represents a deliberately malformed task for assertion verification. */
+    private static class IncorrectEventTask extends Task {
+        IncorrectEventTask() {
+            super(TaskType.EVENT, "incorrect event task");
+        }
     }
 }

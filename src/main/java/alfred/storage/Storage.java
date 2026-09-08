@@ -84,12 +84,16 @@ public class Storage {
     private String serialise(Task task) {
         String done = task.isDone() ? "1" : "0";
         if (task.getType() == TaskType.TODO) {
+            assert task instanceof Todo : "TODO tasks must use the Todo class";
             return "T\t" + done + "\t" + escape(task.getDescription());
         }
         if (task.getType() == TaskType.DEADLINE) {
+            assert task instanceof Deadline : "DEADLINE tasks must use the Deadline class";
             Deadline deadline = (Deadline) task;
             return "D\t" + done + "\t" + escape(task.getDescription()) + "\t" + deadline.getBy();
         }
+        assert task.getType() == TaskType.EVENT : "Every task must have a supported storage type";
+        assert task instanceof Event : "EVENT tasks must use the Event class";
         Event event = (Event) task;
         return "E\t" + done + "\t" + escape(task.getDescription()) + "\t" + event.getFrom()
                 + "\t" + event.getTo();
