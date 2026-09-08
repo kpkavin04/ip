@@ -20,6 +20,22 @@ import alfred.task.Todo;
  */
 public class Storage {
     private static final Path FILE_PATH = Path.of("data", "alfred.txt");
+    private static final String FIELD_SEPARATOR = "\t";
+    private static final String FIELD_SEPARATOR_REGEX = "\\t";
+    private static final int PRESERVE_TRAILING_EMPTY_FIELDS = -1;
+    private static final String TODO_TYPE_CODE = "T";
+    private static final String DEADLINE_TYPE_CODE = "D";
+    private static final String EVENT_TYPE_CODE = "E";
+    private static final String COMPLETE_STATUS = "1";
+    private static final String INCOMPLETE_STATUS = "0";
+    private static final int TYPE_FIELD_INDEX = 0;
+    private static final int STATUS_FIELD_INDEX = 1;
+    private static final int DESCRIPTION_FIELD_INDEX = 2;
+    private static final int FIRST_DATE_TIME_FIELD_INDEX = 3;
+    private static final int SECOND_DATE_TIME_FIELD_INDEX = 4;
+    private static final int TODO_FIELD_COUNT = 3;
+    private static final int DEADLINE_FIELD_COUNT = 4;
+    private static final int EVENT_FIELD_COUNT = 5;
     private final Path filePath;
 
     /** Creates storage using Alfred's default task file location. */
@@ -82,37 +98,40 @@ public class Storage {
 
     /** Serializes one task into an escaped tab-separated storage line. */
     private String serialise(Task task) {
-        String done = task.isDone() ? "1" : "0";
+        String status = task.isDone() ? COMPLETE_STATUS : INCOMPLETE_STATUS;
         if (task.getType() == TaskType.TODO) {
-            return "T\t" + done + "\t" + escape(task.getDescription());
+            return TODO_TYPE_CODE + FIELD_SEPARATOR + status + FIELD_SEPARATOR + escape(task.getDescription());
         }
         if (task.getType() == TaskType.DEADLINE) {
             Deadline deadline = (Deadline) task;
-            return "D\t" + done + "\t" + escape(task.getDescription()) + "\t" + deadline.getBy();
+            return DEADLINE_TYPE_CODE + FIELD_SEPARATOR + status + FIELD_SEPARATOR + escape(task.getDescription())
+                    + FIELD_SEPARATOR + deadline.getBy();
         }
         Event event = (Event) task;
-        return "E\t" + done + "\t" + escape(task.getDescription()) + "\t" + event.getFrom()
-                + "\t" + event.getTo();
+        return EVENT_TYPE_CODE + FIELD_SEPARATOR + status + FIELD_SEPARATOR + escape(task.getDescription())
+                + FIELD_SEPARATOR + event.getFrom() + FIELD_SEPARATOR + event.getTo();
     }
 
     /** Deserializes one task from an escaped tab-separated storage line. */
     private Task deserialise(String line) throws AlfredException {
-        String[] parts = line.split("\\t", -1);
+        String[] parts = line.split(FIELD_SEPARATOR_REGEX, PRESERVE_TRAILING_EMPTY_FIELDS);
         Task task;
-        if (parts.length == 3 && parts[0].equals("T")) {
-            task = new Todo(unescape(parts[2]));
-        } else if (parts.length == 4 && parts[0].equals("D")) {
-            task = new Deadline(unescape(parts[2]), TaskDateTime.parseStored(unescape(parts[3])));
-        } else if (parts.length == 5 && parts[0].equals("E")) {
-            task = new Event(unescape(parts[2]), TaskDateTime.parseStored(unescape(parts[3])),
-                    TaskDateTime.parseStored(unescape(parts[4])));
+        if (parts.length == TODO_FIELD_COUNT && parts[TYPE_FIELD_INDEX].equals(TODO_TYPE_CODE)) {
+            task = new Todo(unescape(parts[DESCRIPTION_FIELD_INDEX]));
+        } else if (parts.length == DEADLINE_FIELD_COUNT && parts[TYPE_FIELD_INDEX].equals(DEADLINE_TYPE_CODE)) {
+            task = new Deadline(unescape(parts[DESCRIPTION_FIELD_INDEX]),
+                    TaskDateTime.parseStored(unescape(parts[FIRST_DATE_TIME_FIELD_INDEX])));
+        } else if (parts.length == EVENT_FIELD_COUNT && parts[TYPE_FIELD_INDEX].equals(EVENT_TYPE_CODE)) {
+            task = new Event(unescape(parts[DESCRIPTION_FIELD_INDEX]),
+                    TaskDateTime.parseStored(unescape(parts[FIRST_DATE_TIME_FIELD_INDEX])),
+                    TaskDateTime.parseStored(unescape(parts[SECOND_DATE_TIME_FIELD_INDEX])));
         } else {
             throw new IllegalArgumentException("Invalid task data");
         }
 
-        if (parts[1].equals("1")) {
+        if (parts[STATUS_FIELD_INDEX].equals(COMPLETE_STATUS)) {
             task.markAsDone();
-        } else if (!parts[1].equals("0")) {
+        } else if (!parts[STATUS_FIELD_INDEX].equals(INCOMPLETE_STATUS)) {
             throw new IllegalArgumentException("Invalid task status");
         }
         return task;
