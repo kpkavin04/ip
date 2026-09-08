@@ -21,6 +21,13 @@ import alfred.task.Todo;
  * Interprets user commands and constructs the tasks requested by those commands.
  */
 public class Parser {
+    private static final String DEADLINE_BY_MARKER = " /by ";
+    private static final String DEADLINE_BY_MARKER_WITHOUT_VALUE = " /by";
+    private static final String EVENT_FROM_MARKER = " /from ";
+    private static final String EVENT_FROM_MARKER_WITHOUT_VALUE = " /from";
+    private static final String EVENT_TO_MARKER = " /to ";
+    private static final String EVENT_TO_MARKER_WITHOUT_VALUE = " /to";
+
     /** Returns the command type recognized at the start of a user input line. */
     private CommandType parseCommandType(String input) {
         return CommandType.fromInput(input);
@@ -36,6 +43,9 @@ public class Parser {
      */
     public Command parseCommand(String input, int taskCount) throws AlfredException {
         CommandType commandType = parseCommandType(input);
+        if (commandType == CommandType.UNKNOWN) {
+            throw new AlfredException("I do not recognise that command. Come again.");
+        }
         if (commandType == CommandType.BYE) {
             return new ExitCommand();
         }
@@ -59,7 +69,7 @@ public class Parser {
 
     /** Parses the keyword supplied to a find command. */
     private String parseFindKeyword(String input) throws AlfredException {
-        String keyword = input.substring(CommandType.FIND.getKeyword().length()).trim();
+        String keyword = extractCommandArguments(input, CommandType.FIND);
         if (keyword.isEmpty()) {
             throw new AlfredException("Alfred needs a keyword after `find`.");
         }
@@ -75,6 +85,7 @@ public class Parser {
      * @throws AlfredException if the command is unrecognized or has invalid task details
      */
     private Task parseTask(String input, CommandType commandType) throws AlfredException {
+        assert commandType != CommandType.UNKNOWN : "Unknown commands must be rejected before task parsing";
         if (commandType == CommandType.DEADLINE) {
             return parseDeadline(input);
         }
@@ -122,16 +133,16 @@ public class Parser {
 
     /** Parses a deadline command into a deadline task. */
     private Task parseDeadline(String input) throws AlfredException {
-        int byMarkerIndex = input.indexOf(" /by ");
+        int byMarkerIndex = input.indexOf(DEADLINE_BY_MARKER);
         if (byMarkerIndex == -1) {
-            if (input.endsWith(" /by")) {
+            if (input.endsWith(DEADLINE_BY_MARKER_WITHOUT_VALUE)) {
                 throw new AlfredException("Alfred needs a due time after `/by`.");
             }
             throw new AlfredException("Alfred needs `/by` followed by a due time for a deadline.");
         }
         String description = input.substring(CommandType.DEADLINE.getKeyword().length(), byMarkerIndex)
                 .trim();
-        String by = input.substring(byMarkerIndex + 5).trim();
+        String by = input.substring(byMarkerIndex + DEADLINE_BY_MARKER.length()).trim();
         if (description.isEmpty()) {
             throw new AlfredException("Alfred needs a deadline description before `/by`.");
         }
@@ -144,23 +155,23 @@ public class Parser {
 
     /** Parses an event command into an event task. */
     private Task parseEvent(String input) throws AlfredException {
-        int fromMarkerIndex = input.indexOf(" /from ");
+        int fromMarkerIndex = input.indexOf(EVENT_FROM_MARKER);
         if (fromMarkerIndex == -1) {
-            if (input.endsWith(" /from")) {
+            if (input.endsWith(EVENT_FROM_MARKER_WITHOUT_VALUE)) {
                 throw new AlfredException("Alfred needs a start time after `/from`.");
             }
             throw new AlfredException("Alfred needs `/from` followed by a start time for an event.");
         }
-        int toMarkerIndex = input.indexOf(" /to ", fromMarkerIndex + 7);
+        int toMarkerIndex = input.indexOf(EVENT_TO_MARKER, fromMarkerIndex + EVENT_FROM_MARKER.length());
         if (toMarkerIndex == -1) {
-            if (input.endsWith(" /to")) {
+            if (input.endsWith(EVENT_TO_MARKER_WITHOUT_VALUE)) {
                 throw new AlfredException("Alfred needs an end time after `/to`.");
             }
             throw new AlfredException("Alfred needs `/to` followed by an end time for an event.");
         }
         String description = input.substring(CommandType.EVENT.getKeyword().length(), fromMarkerIndex).trim();
-        String from = input.substring(fromMarkerIndex + 7, toMarkerIndex).trim();
-        String to = input.substring(toMarkerIndex + 5).trim();
+        String from = input.substring(fromMarkerIndex + EVENT_FROM_MARKER.length(), toMarkerIndex).trim();
+        String to = input.substring(toMarkerIndex + EVENT_TO_MARKER.length()).trim();
         if (description.isEmpty()) {
             throw new AlfredException("Alfred needs an event description before `/from`.");
         }
@@ -177,10 +188,15 @@ public class Parser {
 
     /** Parses a to-do command into a to-do task. */
     private Task parseTodo(String input) throws AlfredException {
-        String description = input.substring(4).trim();
+        String description = extractCommandArguments(input, CommandType.TODO);
         if (description.isEmpty()) {
             throw new AlfredException("Alfred cannot add a to-do without a mission description.");
         }
         return new Todo(description);
+    }
+
+    /** Returns the text following a recognized command keyword. */
+    private String extractCommandArguments(String input, CommandType commandType) {
+        return input.substring(commandType.getKeyword().length()).trim();
     }
 }

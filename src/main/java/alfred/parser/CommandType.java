@@ -12,7 +12,8 @@ public enum CommandType {
     DELETE("delete"),
     TODO("todo"),
     DEADLINE("deadline"),
-    EVENT("event");
+    EVENT("event"),
+    UNKNOWN("");
 
     private final String keyword;
 
@@ -29,15 +30,18 @@ public enum CommandType {
      * Finds the command type at the beginning of a user input line.
      *
      * @param input full line entered by the user
-     * @return the matching command type, or {@code null} when no command type matches
+     * @return the matching command type, or {@link #UNKNOWN} when no command type matches
      */
     public static CommandType fromInput(String input) {
         for (CommandType commandType : values()) {
+            if (commandType == UNKNOWN) {
+                continue;
+            }
             if (input.equals(commandType.keyword) || input.startsWith(commandType.keyword + " ")) {
                 return commandType;
             }
         }
-        return null;
+        return UNKNOWN;
     }
 
     /**

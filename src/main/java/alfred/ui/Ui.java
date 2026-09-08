@@ -77,16 +77,21 @@ public class Ui {
     /** Displays every task in the current task list. */
     public void showTaskList(TaskList tasks) {
         showMessage("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            showMessage((i + 1) + "." + tasks.get(i));
-        }
+        showNumberedTasks(tasks);
     }
 
     /** Displays the tasks whose descriptions match a search keyword. */
     public void showMatchingTasks(List<Task> matchingTasks) {
         showMessage("Here are the matching tasks in your list:");
-        for (int i = 0; i < matchingTasks.size(); i++) {
-            showMessage((i + 1) + "." + matchingTasks.get(i));
+        showNumberedTasks(matchingTasks);
+    }
+
+    /** Displays tasks with the one-based numbering used in Alfred's task lists. */
+    private void showNumberedTasks(Iterable<Task> tasks) {
+        int taskNumber = 1;
+        for (Task task : tasks) {
+            showMessage(taskNumber + "." + task);
+            taskNumber++;
         }
     }
 
