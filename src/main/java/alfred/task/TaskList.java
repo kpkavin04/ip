@@ -26,16 +26,19 @@ public class TaskList implements Iterable<Task> {
 
     /** Adds a task to the end of the list. */
     public void add(Task task) {
+        assert task != null : "Task lists must not contain null tasks";
         tasks.add(task);
     }
 
     /** Returns the task at the given zero-based index. */
     public Task get(int taskIndex) {
+        assert isValidIndex(taskIndex) : "Commands must use parser-validated task indices";
         return tasks.get(taskIndex);
     }
 
     /** Removes and returns the task at the given zero-based index. */
     public Task remove(int taskIndex) {
+        assert isValidIndex(taskIndex) : "Commands must use parser-validated task indices";
         return tasks.remove(taskIndex);
     }
 
@@ -65,5 +68,10 @@ public class TaskList implements Iterable<Task> {
     @Override
     public Iterator<Task> iterator() {
         return tasks.iterator();
+    }
+
+    /** Returns whether the index identifies an existing task. */
+    private boolean isValidIndex(int taskIndex) {
+        return taskIndex >= 0 && taskIndex < tasks.size();
     }
 }

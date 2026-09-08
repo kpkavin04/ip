@@ -39,6 +39,13 @@ Before making any code change, read and follow both `docs/java-coding-standard.m
 `docs/git-conventions.md`. The Java standard governs source-code style; the Git standard
 governs branch names and commit messages whenever Git history is changed.
 
+## Assertions
+
+When modifying Java code, add or maintain Java `assert` statements for meaningful
+programmer-controlled invariants, preconditions, postconditions, or control-flow assumptions.
+Do not use assertions for user input, file data, or required work; handle those with validation
+and exceptions instead.
+
 ## Git
 
 Use lightweight tags unless the user requests an annotated tag.
