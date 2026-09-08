@@ -1,6 +1,7 @@
 package alfred.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -24,5 +25,20 @@ class TaskListTest {
         TaskList taskList = new TaskList(List.of(new Todo("read book")));
 
         assertEquals(List.of(), taskList.findTasks("report"));
+    }
+
+    @Test
+    void add_nullTask_assertionErrorThrown() {
+        TaskList taskList = new TaskList();
+
+        assertThrows(AssertionError.class, () -> taskList.add(null));
+    }
+
+    @Test
+    void access_invalidIndex_assertionErrorThrown() {
+        TaskList taskList = new TaskList(List.of(new Todo("read book")));
+
+        assertThrows(AssertionError.class, () -> taskList.get(-1));
+        assertThrows(AssertionError.class, () -> taskList.remove(1));
     }
 }
