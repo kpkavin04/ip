@@ -43,6 +43,9 @@ public class Parser {
      */
     public Command parseCommand(String input, int taskCount) throws AlfredException {
         CommandType commandType = parseCommandType(input);
+        if (commandType == CommandType.UNKNOWN) {
+            throw new AlfredException("I do not recognise that command. Come again.");
+        }
         if (commandType == CommandType.BYE) {
             return new ExitCommand();
         }
@@ -82,6 +85,7 @@ public class Parser {
      * @throws AlfredException if the command is unrecognized or has invalid task details
      */
     private Task parseTask(String input, CommandType commandType) throws AlfredException {
+        assert commandType != CommandType.UNKNOWN : "Unknown commands must be rejected before task parsing";
         if (commandType == CommandType.DEADLINE) {
             return parseDeadline(input);
         }

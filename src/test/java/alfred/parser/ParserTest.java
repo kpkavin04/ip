@@ -133,6 +133,11 @@ class ParserTest {
                 parser.parseCommand("remind me", 0));
     }
 
+    @Test
+    void fromInput_unknownCommand_returnsUnknownCommandType() {
+        assertEquals(CommandType.UNKNOWN, CommandType.fromInput("remind me"));
+    }
+
     private Task getAddedTask(String input) throws AlfredException {
         TaskList tasks = new TaskList();
         Command command = parser.parseCommand(input, tasks.size());
