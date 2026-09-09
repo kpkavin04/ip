@@ -86,6 +86,13 @@ public class Ui {
         showNumberedTasks(matchingTasks);
     }
 
+    /** Displays a chronological task view without changing the task list. */
+    public void showSortedTasks(List<Task> sortedTasks, boolean isAscending) {
+        String direction = isAscending ? "ascending" : "descending";
+        showMessage("Here are the tasks in " + direction + " chronological order:");
+        showNumberedTasks(sortedTasks);
+    }
+
     /** Displays tasks with the one-based numbering used in Alfred's task lists. */
     private void showNumberedTasks(Iterable<Task> tasks) {
         int taskNumber = 1;
