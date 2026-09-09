@@ -1,6 +1,8 @@
 package alfred.task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,6 +61,38 @@ public class TaskList implements Iterable<Task> {
         return tasks.stream()
                 .filter(task -> task.getDescription().toLowerCase().contains(lowerCaseKeyword))
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Returns a stable chronological view of the tasks without changing their stored order.
+     *
+     * @param isAscending whether the earliest dated tasks appear first
+     * @return dated tasks ordered chronologically, with to-dos on the specified end of the result
+     */
+    public List<Task> getTasksSortedChronologically(boolean isAscending) {
+        Comparator<LocalDateTime> dateTimeComparator = isAscending
+                ? Comparator.naturalOrder()
+                : Comparator.reverseOrder();
+        Comparator<LocalDateTime> nullableDateTimeComparator = isAscending
+                ? Comparator.nullsLast(dateTimeComparator)
+                : Comparator.nullsFirst(dateTimeComparator);
+
+        return tasks.stream()
+                .sorted(Comparator.comparing(this::getChronologicalDateTime, nullableDateTimeComparator))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /** Returns the date and time used to order a dated task, or {@code null} for a to-do. */
+    private LocalDateTime getChronologicalDateTime(Task task) {
+        assert task != null : "Task lists must not contain null tasks";
+        if (task instanceof Deadline deadline) {
+            return deadline.getBy();
+        }
+        if (task instanceof Event event) {
+            return event.getFrom();
+        }
+        assert task instanceof Todo : "Every task must have a supported chronological ordering";
+        return null;
     }
 
     /** Returns an iterator over the tasks in their list order. */

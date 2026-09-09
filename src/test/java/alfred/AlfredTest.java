@@ -39,6 +39,26 @@ class AlfredTest {
     }
 
     @Test
+    void getResponse_sortCommand_displaysSortedViewWithoutChangingTaskOrder() {
+        Alfred alfred = createGuiAlfred();
+
+        alfred.getResponse("todo read book");
+        alfred.getResponse("deadline submit report /by 2019-12-03");
+        alfred.getResponse("event meeting /from 2/12/2019 1800 /to 2/12/2019 1900");
+
+        assertEquals("Here are the tasks in descending chronological order:\n"
+                        + "1.[T][ ] read book\n"
+                        + "2.[D][ ] submit report (by: Dec 03 2019)\n"
+                        + "3.[E][ ] meeting (from: Dec 02 2019 18:00 to: Dec 02 2019 19:00)",
+                alfred.getResponse("sort desc"));
+        assertEquals("SortCommand", alfred.getLastCommandType());
+        assertEquals("Here are the tasks in your list:\n1.[T][ ] read book\n"
+                        + "2.[D][ ] submit report (by: Dec 03 2019)\n"
+                        + "3.[E][ ] meeting (from: Dec 02 2019 18:00 to: Dec 02 2019 19:00)",
+                alfred.getResponse("list"));
+    }
+
+    @Test
     void getResponse_byeRequestsExit() {
         Alfred alfred = createGuiAlfred();
 

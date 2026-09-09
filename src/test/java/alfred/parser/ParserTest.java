@@ -17,6 +17,7 @@ import alfred.command.ExitCommand;
 import alfred.command.FindCommand;
 import alfred.command.ListCommand;
 import alfred.command.MarkCommand;
+import alfred.command.SortCommand;
 import alfred.command.UnmarkCommand;
 import alfred.exception.AlfredException;
 import alfred.storage.Storage;
@@ -39,6 +40,9 @@ class ParserTest {
         assertInstanceOf(ExitCommand.class, parser.parseCommand("bye", 1));
         assertInstanceOf(ListCommand.class, parser.parseCommand("list", 1));
         assertInstanceOf(FindCommand.class, parser.parseCommand("find book", 1));
+        assertInstanceOf(SortCommand.class, parser.parseCommand("sort", 1));
+        assertInstanceOf(SortCommand.class, parser.parseCommand("sort asc", 1));
+        assertInstanceOf(SortCommand.class, parser.parseCommand("sort desc", 1));
         assertInstanceOf(MarkCommand.class, parser.parseCommand("mark 1", 1));
         assertInstanceOf(UnmarkCommand.class, parser.parseCommand("unmark 1", 1));
         assertInstanceOf(DeleteCommand.class, parser.parseCommand("delete 1", 1));
@@ -125,6 +129,15 @@ class ParserTest {
                 parser.parseCommand("event project /from  /to 2019-12-03", 0));
         assertError("Alfred needs an end time after `/to`.", () ->
                 parser.parseCommand("event project /from 2019-12-02 /to", 0));
+    }
+
+    @Test
+    void parseCommand_invalidSortDirection_exceptionWithUsageGuidanceThrown() {
+        String expectedMessage = "Alfred only understands `sort`, `sort asc`, or `sort desc`.";
+
+        assertError(expectedMessage, () -> parser.parseCommand("sort ascending", 0));
+        assertError(expectedMessage, () -> parser.parseCommand("sort asc now", 0));
+        assertError(expectedMessage, () -> parser.parseCommand("SORT asc", 0));
     }
 
     @Test

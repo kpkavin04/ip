@@ -766,6 +766,171 @@ Bye. Hope to see you again soon sir!
 ____________________________________________________________
 ```
 
+## Sort tasks without changing stored order
+
+**Aim:** Verify ascending and descending chronological views, stable equal-date ordering, to-do placement,
+rejected sort syntax, and preservation of the original task order.
+
+### Input
+```text
+todo first todo
+deadline later deadline /by 2019-12-03
+event same time event /from 2/12/2019 1800 /to 2/12/2019 1900
+deadline same time deadline /by 2/12/2019 1800
+todo second todo
+event early event /from 2019-12-01 /to 2019-12-01
+sort
+sort asc
+sort desc
+sort ascending
+SORT asc
+list
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
+    _    _  __             _
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] first todo
+Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] later deadline (by: Dec 03 2019)
+Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] same time event (from: Dec 02 2019 18:00 to: Dec 02 2019 19:00)
+Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [D][ ] same time deadline (by: Dec 02 2019 18:00)
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [T][ ] second todo
+Now you have 5 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+  [E][ ] early event (from: Dec 01 2019 to: Dec 01 2019)
+Now you have 6 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in ascending chronological order:
+1.[E][ ] early event (from: Dec 01 2019 to: Dec 01 2019)
+2.[E][ ] same time event (from: Dec 02 2019 18:00 to: Dec 02 2019 19:00)
+3.[D][ ] same time deadline (by: Dec 02 2019 18:00)
+4.[D][ ] later deadline (by: Dec 03 2019)
+5.[T][ ] first todo
+6.[T][ ] second todo
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in ascending chronological order:
+1.[E][ ] early event (from: Dec 01 2019 to: Dec 01 2019)
+2.[E][ ] same time event (from: Dec 02 2019 18:00 to: Dec 02 2019 19:00)
+3.[D][ ] same time deadline (by: Dec 02 2019 18:00)
+4.[D][ ] later deadline (by: Dec 03 2019)
+5.[T][ ] first todo
+6.[T][ ] second todo
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in descending chronological order:
+1.[T][ ] first todo
+2.[T][ ] second todo
+3.[D][ ] later deadline (by: Dec 03 2019)
+4.[E][ ] same time event (from: Dec 02 2019 18:00 to: Dec 02 2019 19:00)
+5.[D][ ] same time deadline (by: Dec 02 2019 18:00)
+6.[E][ ] early event (from: Dec 01 2019 to: Dec 01 2019)
+____________________________________________________________
+____________________________________________________________
+Alfred only understands `sort`, `sort asc`, or `sort desc`.
+____________________________________________________________
+____________________________________________________________
+Alfred only understands `sort`, `sort asc`, or `sort desc`.
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][ ] first todo
+2.[D][ ] later deadline (by: Dec 03 2019)
+3.[E][ ] same time event (from: Dec 02 2019 18:00 to: Dec 02 2019 19:00)
+4.[D][ ] same time deadline (by: Dec 02 2019 18:00)
+5.[T][ ] second todo
+6.[E][ ] early event (from: Dec 01 2019 to: Dec 01 2019)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```
+
+## Sort an empty task list
+
+**Aim:** Verify that sorting an empty task list displays an empty chronological view without an error.
+
+### Input
+```text
+sort
+bye
+```
+
+### Expected output
+```text
+____________________________________________________________
+      *==/          |     |            \==*
+     /XX/           |\__\/|             \XX\
+   /XXXX\           |XXXXX|             /XXXX\
+ |XXXXXX\_         *XXXXXXX*         \_/XXXXXX|
+XXXXXXXXXXXxxxxxxxXXXXXXXXXXXxxxxxxxXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+|XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|
+ XXXXXX/^^^^"\XXXXXXXXXXXXXXXXXXXXX/^^^^^\XXXXXX
+ |XXX|       \XXX/^^\XXXXX/^^\XXX/       |XXX|
+   \XX\       \X/    \XXX/    \X/       /XX/
+      "\       "      \X/      "       /
+
+    _    _  __             _
+   / \  | |/ _|_ __ ___  __| |
+  / _ \ | | |_| '__/ _ \/ _` |
+ / ___ \| |  _| | |  __/ (_| |
+/_/   \_\_|_| |_|  \___|\__,_|
+
+How can I assist from the cave?
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in ascending chronological order:
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon sir!
+____________________________________________________________
+```
+
 ## Manual JavaFX verification
 
 Run `./gradlew run`. The resizable Alfred window should open with a scrollable dialog area, a
@@ -773,7 +938,8 @@ text field, and a Send button. It must show Alfred's `How can I assist from the 
 message before any user input. Enter `todo read book` and press Enter; the response must confirm
 that the task was added. Then enter `list` and click Send; the response must include the saved
 task. Enter `todo` and verify the error response does not remove the task shown by a final `list`.
-Enter enough commands to verify that the scroll pane follows the newest dialog. Resize the window
+Enter `sort desc` and verify that it displays a descending view without changing the order shown by
+a following `list`. Enter enough commands to verify that the scroll pane follows the newest dialog. Resize the window
 to verify that the scroll area and text field grow with it while Send remains at the bottom-right.
 Finally, enter `bye`; Alfred must show the farewell response and then close the window. Enter an
 invalid command before `bye` to verify that only a valid exit command closes the application.

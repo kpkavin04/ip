@@ -9,6 +9,7 @@ import alfred.command.ExitCommand;
 import alfred.command.FindCommand;
 import alfred.command.ListCommand;
 import alfred.command.MarkCommand;
+import alfred.command.SortCommand;
 import alfred.command.UnmarkCommand;
 import alfred.exception.AlfredException;
 import alfred.task.Deadline;
@@ -27,6 +28,8 @@ public class Parser {
     private static final String EVENT_FROM_MARKER_WITHOUT_VALUE = " /from";
     private static final String EVENT_TO_MARKER = " /to ";
     private static final String EVENT_TO_MARKER_WITHOUT_VALUE = " /to";
+    private static final String SORT_USAGE_MESSAGE =
+            "Alfred only understands `sort`, `sort asc`, or `sort desc`.";
 
     /** Returns the command type recognized at the start of a user input line. */
     private CommandType parseCommandType(String input) {
@@ -43,6 +46,9 @@ public class Parser {
      */
     public Command parseCommand(String input, int taskCount) throws AlfredException {
         CommandType commandType = parseCommandType(input);
+        if (isSortCommand(input)) {
+            return new SortCommand(parseSortOrder(input));
+        }
         if (commandType == CommandType.UNKNOWN) {
             throw new AlfredException("I do not recognise that command. Come again.");
         }
@@ -65,6 +71,29 @@ public class Parser {
             return new DeleteCommand(parseTaskIndex(input, commandType.getKeyword(), taskCount));
         }
         return new AddCommand(parseTask(input, commandType));
+    }
+
+    /** Parses the optional direction supplied to a sort command. */
+    private boolean parseSortOrder(String input) throws AlfredException {
+        if (!input.startsWith(CommandType.SORT.getKeyword())) {
+            throw new AlfredException(SORT_USAGE_MESSAGE);
+        }
+
+        String direction = extractCommandArguments(input, CommandType.SORT);
+        if (direction.isEmpty() || direction.equals("asc")) {
+            return true;
+        }
+        if (direction.equals("desc")) {
+            return false;
+        }
+        throw new AlfredException(SORT_USAGE_MESSAGE);
+    }
+
+    /** Returns whether the input begins with the sort command, regardless of letter case. */
+    private boolean isSortCommand(String input) {
+        String sortKeyword = CommandType.SORT.getKeyword();
+        return input.regionMatches(true, 0, sortKeyword, 0, sortKeyword.length())
+                && (input.length() == sortKeyword.length() || input.charAt(sortKeyword.length()) == ' ');
     }
 
     /** Parses the keyword supplied to a find command. */
